@@ -263,3 +263,9 @@ footer h2 span{color:var(--acid)}
   .page-hero{padding:110px 0 0}
   footer{margin-top:64px}
 }
+
+/* share buttons */
+.share-link{display:inline-flex;align-items:center;gap:.55em;margin-top:14px;padding:.6em 1.05em;border:1.5px solid var(--acid);border-radius:999px;background:transparent;color:var(--acid);font-family:var(--body);font-weight:800;font-size:.9rem;cursor:pointer;transition:background .2s,color .2s,transform .2s}
+.share-link:hover{background:var(--acid);color:#0b0b0b;transform:translateY(-2px)}
+.share-inline{display:inline-flex;align-items:center;gap:.45em}
+.ico{flex:none}
