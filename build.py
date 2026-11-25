@@ -39,6 +39,7 @@ SPECIALS = {                   # themed nights: date -> {"name":..., "tag_en":..
 }
 TAGS = ["Monday is a terrible day to behave.", "You have work tomorrow. So what?", "Same songs. New stories.",
         "Don't blame us tomorrow.", "Good music. Better company."]
+MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Sala+Apolo+Barcelona"
 PRICE_ADVANCE, PRICE_DOOR, FREE_UNTIL = 11, 13, "01:30"
 VENUE = {"name": "Sala Apolo", "street": "Carrer Nou de la Rambla 113", "short": "C/ Nou de la Rambla 113",
          "postal": "08004", "city": "Barcelona"}
@@ -480,7 +481,7 @@ def sec_info(lang, path, full):
       <h3>{VENUE['name']}</h3>
       <p>{VENUE['short']}, {VENUE['postal']} {VENUE['city']}<br>{c['getting_there']}</p>
       <div class="facts">{facts}</div>
-      <a class="btn btn-ticket" href="https://maps.google.com/?q=Sala+Apolo+Barcelona" target="_blank" rel="noopener">{c['maps']}</a>
+      <a class="btn btn-ticket" href="{MAPS_URL}" target="_blank" rel="noopener">{c['maps']}</a>
     </div>
     <div class="reveal">{det}{more}</div>
   </div>
@@ -514,7 +515,7 @@ def build_home(lang, path):
     <h1>{c['h1']}</h1>
     <div class="meta">
       <span class="chip">📅 <b data-next-date>{c['dow']} 1 MAR</b> · <span data-next-name>Opening</span></span>
-      <span class="chip">📍 Sala Apolo · Barcelona</span>
+      <a class="chip chip-link" href="{MAPS_URL}" target="_blank" rel="noopener" aria-label="Sala Apolo · Barcelona · {c['maps']}">📍 Sala Apolo · Barcelona <span class="chip-arrow" aria-hidden="true">↗</span></a>
       <span class="chip">🎟 {c['chip_free']}</span>
     </div>
     <div class="ctas">{dice('btn-list btn-xl', c['join'])}{dice('btn-ticket btn-xl', c['tickets_from'])}</div>

@@ -284,3 +284,8 @@ footer h2 span{color:var(--acid)}
 .soon-box{background:var(--card);border:1px dashed #d8ff3e66;border-radius:18px;padding:22px;display:grid;gap:6px}
 .soon-box b{font-family:var(--head);font-weight:400;font-size:1.4rem;text-transform:uppercase}
 .soon-box a{color:var(--acid);font-weight:800;text-decoration:none}
+
+/* venue chip links to maps */
+a.chip-link{color:inherit;text-decoration:none;transition:border-color .2s,background .2s}
+a.chip-link:hover,a.chip-link:focus-visible{border-color:var(--acid);background:#d8ff3e14}
+.chip-arrow{color:var(--acid);font-weight:800;margin-left:2px}
