@@ -278,3 +278,9 @@ footer h2 span{color:var(--acid)}
 .hero + section{padding-top:60px}
 @media(max-width:760px){.countdown b{font-size:2.3rem}.hero + section{padding-top:44px}}
 .hero .scroll{display:none}
+
+/* no confirmed dates left */
+.cd-soon{font-family:var(--head);font-size:clamp(1.6rem,4vw,2.4rem);text-transform:uppercase;color:var(--acid);letter-spacing:.02em}
+.soon-box{background:var(--card);border:1px dashed #d8ff3e66;border-radius:18px;padding:22px;display:grid;gap:6px}
+.soon-box b{font-family:var(--head);font-weight:400;font-size:1.4rem;text-transform:uppercase}
+.soon-box a{color:var(--acid);font-weight:800;text-decoration:none}

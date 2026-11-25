@@ -17,8 +17,9 @@
   var MONTHS = ES ? ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'] : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   var DOW = ES ? ['LUN', 'MAR', 'MIÉ', 'JUE', 'VIE', 'SÁB', 'DOM'] : ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
   var T = ES
-    ? { opening: 'Noche de opening', every: 'Cada lunes', note: 'Lista gratis hasta la 01:30 · Entradas desde 11 €', list: 'Lista gratis', buy: 'Comprar entradas', prev: 'Mes anterior', next: 'Mes siguiente', copied: 'Enlace copiado. Contagia la mala influencia.', share: 'La peor decisión que tomarás en toda la semana.' }
-    : { opening: 'Opening night', every: 'Every Monday', note: 'Free list until 01:30 · Tickets from 11 €', list: 'Join free list', buy: 'Buy tickets', prev: 'Previous month', next: 'Next month', copied: 'Link copied. Spread the bad influence.', share: "The worst decision you'll make all week." };
+    ? { opening: 'Noche de opening', every: 'Cada lunes', note: 'Lista gratis hasta la 01:30 · Entradas desde 11 €', list: 'Lista gratis', buy: 'Comprar entradas', prev: 'Mes anterior', next: 'Mes siguiente', copied: 'Enlace copiado. Contagia la mala influencia.', share: 'La peor decisión que tomarás en toda la semana.', moreSoon: 'Más lunes, muy pronto.', moreSoonNote: 'Síguenos en Instagram para enterarte el primero.', newDates: 'Nuevas fechas muy pronto', soonChip: 'Nuevas fechas pronto' }
+    : { opening: 'Opening night', every: 'Every Monday', note: 'Free list until 01:30 · Tickets from 11 €', list: 'Join free list', buy: 'Buy tickets', prev: 'Previous month', next: 'Next month', copied: 'Link copied. Spread the bad influence.', share: "The worst decision you'll make all week.", moreSoon: 'More Mondays coming soon.', moreSoonNote: 'Follow us on Instagram to hear first.', newDates: 'New dates coming soon', soonChip: 'New dates soon' };
+  var IG = 'https://www.instagram.com/baddecisionsbcn/';
 
   // ---------- DICE links ----------
   var fallback = doc.getAttribute('data-tickets') || '#tickets';
@@ -35,7 +36,10 @@
   var upcoming = EVENTS.filter(function (e) { return e.date >= today; });
   var NEXT = upcoming[0] || EVENTS[EVENTS.length - 1];
   function nice(d) { return DOW[0] + ' ' + d.getDate() + ' ' + MON3[d.getMonth()]; }
-  if (NEXT) {
+  var NO_UPCOMING = EVENTS.length && !upcoming.length;
+  if (NO_UPCOMING) {
+    $$('[data-next-date]').forEach(function (el) { el.parentNode.innerHTML = '📅 <b>' + T.soonChip + '</b>'; });
+  } else if (NEXT) {
     $$('[data-next-date]').forEach(function (el) { el.textContent = nice(NEXT.date); });
     $$('[data-next-name]').forEach(function (el) { el.textContent = NEXT.special ? 'Opening' : 'Bad Monday'; });
   }
@@ -47,11 +51,13 @@
       var past = parse(el.getAttribute('data-date')) < today;
       el.hidden = past || shown >= 3; if (!el.hidden) shown++;
     });
+    if (!shown) list.insertAdjacentHTML('beforeend', '<div class="soon-box"><b>' + T.moreSoon + '</b><a href="' + IG + '" target="_blank" rel="noopener">' + T.moreSoonNote + '</a></div>');
   });
 
   // ---------- countdown (doors: midnight on Monday night) ----------
   (function () {
     var els = $$('[data-countdown]'); if (!els.length || !NEXT) return;
+    if (NO_UPCOMING) { els.forEach(function (el) { el.innerHTML = '<p class="cd-soon">' + T.newDates + '</p>'; }); return; }
     var t = new Date(NEXT.date); t.setDate(t.getDate() + 1); t.setHours(0, 0, 0, 0);
     function tick() {
       var ms = Math.max(0, t - new Date());
@@ -65,9 +71,10 @@
   (function () {
     var root = $('#calendar'); if (!root || !EVENTS.length) return;
     var byId = {}; EVENTS.forEach(function (e) { byId[e.id] = e; });
-    var cur = new Date(NEXT.date.getFullYear(), NEXT.date.getMonth(), 1);
+    var cur = NO_UPCOMING ? new Date(today.getFullYear(), today.getMonth(), 1) : new Date(NEXT.date.getFullYear(), NEXT.date.getMonth(), 1);
+    if (NO_UPCOMING && cur > max) max = new Date(cur);
     var min = new Date(EVENTS[0].date.getFullYear(), EVENTS[0].date.getMonth(), 1);
-    var last = EVENTS[EVENTS.length - 1].date, max = new Date(last.getFullYear(), last.getMonth(), 1);
+    var last = EVENTS[EVENTS.length - 1].date, max = new Date(last.getFullYear(), last.getMonth() + 3, 1);
     var sel = NEXT.id;
     function iso(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
     function render() {
@@ -83,7 +90,13 @@
         h += e ? '<button class="' + cls + '" data-day="' + k + '" aria-label="' + esc(e.name + ' ' + k) + '">' + d + '</button>' : '<div class="' + cls + '">' + d + '</div>';
       }
       root.innerHTML = h + '</div>';
-      detail(byId[sel]);
+      var inMonth = EVENTS.some(function (e) { return e.date.getFullYear() === cur.getFullYear() && e.date.getMonth() === cur.getMonth(); });
+      if (inMonth && !NO_UPCOMING) detail(byId[sel]); else soonDetail();
+    }
+    function soonDetail() {
+      var el = $('#event-detail'); if (!el) return;
+      el.innerHTML = '<p class="det-kicker">' + T.every + '</p><h3 class="det-name">' + T.moreSoon + '</h3>' +
+        '<p class="det-note">' + T.moreSoonNote + '</p><div class="det-actions"><a class="btn btn-ticket" href="' + IG + '" target="_blank" rel="noopener">Instagram</a></div>';
     }
     function detail(e) {
       var el = $('#event-detail'); if (!el || !e) return;
