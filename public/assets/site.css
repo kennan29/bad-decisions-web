@@ -3,10 +3,10 @@
 @font-face{font-family:'M PLUS Rounded 1c';src:url(fonts/mplus-rounded-700.woff2) format('woff2');font-weight:700;font-style:normal;font-display:swap}
 @font-face{font-family:'M PLUS Rounded 1c';src:url(fonts/mplus-rounded-800.woff2) format('woff2');font-weight:800;font-style:normal;font-display:swap}
 /* Silent Brush: drop the file in assets/fonts/silent-brush.woff2 (until then it falls back to Anton) */
-@font-face{font-family:'Silent Brush';src:url(fonts/silent-brush.woff2) format('woff2'),url(fonts/silent-brush.otf) format('opentype'),url(fonts/silent-brush.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'BD Brush';src:url(fonts/silent-brush.woff2) format('woff2'),url(fonts/silent-brush.otf) format('opentype'),url(fonts/silent-brush.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap}
 :root{
   --acid:#D8FF3E; --acid-d:#8FAA1F; --bg:#0B0B0B; --card:#151515; --line:#ffffff14; --cream:#F5F0E7; --mute:#8d8a83;
-  --head:'Anton','Impact','Arial Narrow',sans-serif; --body:'M PLUS Rounded 1c',system-ui,sans-serif; --brush:'Silent Brush','Anton','Impact',sans-serif;
+  --head:'Anton','Impact','Arial Narrow',sans-serif; --body:'M PLUS Rounded 1c',system-ui,sans-serif; --brush:'BD Brush','Anton','Impact',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
