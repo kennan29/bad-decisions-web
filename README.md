@@ -6,7 +6,7 @@ Static website for Bad Decisions (every Monday at Sala Apolo, Barcelona). Englis
 - `build.py`: generates every page into `public/`. Dates, prices, copy and FAQ live at the top of this file.
 - `public/`: the site that gets published (Cloudflare Pages output directory).
 - `public/assets/site.css`, `public/assets/site.js`: shared styles and script.
-- `public/assets/fonts/`: Anton and M PLUS Rounded 1c (self-hosted). Add `silent-brush.woff2` here.
+- `public/assets/fonts/`: Anton, M PLUS Rounded 1c and Permanent Marker (self-hosted, all SIL Open Font License). Permanent Marker is the accent font (class `.brush`).
 
 ## Change something
 1. Edit `build.py` (dates, prices, texts).

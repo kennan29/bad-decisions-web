@@ -2,8 +2,8 @@
 @font-face{font-family:'M PLUS Rounded 1c';src:url(fonts/mplus-rounded-500.woff2) format('woff2');font-weight:500;font-style:normal;font-display:swap}
 @font-face{font-family:'M PLUS Rounded 1c';src:url(fonts/mplus-rounded-700.woff2) format('woff2');font-weight:700;font-style:normal;font-display:swap}
 @font-face{font-family:'M PLUS Rounded 1c';src:url(fonts/mplus-rounded-800.woff2) format('woff2');font-weight:800;font-style:normal;font-display:swap}
-/* Silent Brush: drop the file in assets/fonts/silent-brush.woff2 (until then it falls back to Anton) */
-@font-face{font-family:'BD Brush';src:url(fonts/silent-brush.woff2) format('woff2'),url(fonts/silent-brush.otf) format('opentype'),url(fonts/silent-brush.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap}
+/* Accent font: Permanent Marker (Google Fonts, SIL Open Font License) */
+@font-face{font-family:'BD Brush';src:url(fonts/permanent-marker-400.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
 :root{
   --acid:#D8FF3E; --acid-d:#8FAA1F; --bg:#0B0B0B; --card:#151515; --line:#ffffff14; --cream:#F5F0E7; --mute:#8d8a83;
   --head:'Anton','Impact','Arial Narrow',sans-serif; --body:'M PLUS Rounded 1c',system-ui,sans-serif; --brush:'BD Brush','Anton','Impact',sans-serif;
@@ -212,7 +212,7 @@ footer h2 span{color:var(--acid)}
 .bd-toast.show{opacity:1;transform:translate(-50%,0)}
 
 /* ---- v3 additions ---- */
-.brush{font-family:var(--brush);font-weight:400;letter-spacing:0}
+.brush{font-family:var(--brush);font-weight:400;letter-spacing:0;text-transform:none}
 .nav-links a[aria-current=page]{color:var(--acid)}
 .lede{color:var(--mute);max-width:620px;font-size:1.05rem;margin:-18px 0 32px}
 .genres{grid-template-columns:repeat(3,1fr)}
