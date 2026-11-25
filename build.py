@@ -18,6 +18,14 @@ import sys
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, "public")
 LOCAL = "--local" in sys.argv
+
+# ---------------------------------------------------------------- COMING SOON
+# True  = the live site (branch main) shows only the spinning coin + "Coming soon".
+# False = the full website goes live.
+# Local previews (--local), --full, and Cloudflare preview builds of any other branch always show the full site.
+COMING_SOON = True
+_branch = os.environ.get("CF_PAGES_BRANCH")
+SHOW_SOON = COMING_SOON and not LOCAL and "--full" not in sys.argv and (_branch in (None, "", "main"))
 SITE = "https://baddecisionsbcn.com"
 BUILD_DATE = dt.date.today().isoformat()
 
@@ -75,6 +83,10 @@ E = html.escape
 C = {
  "en": {
   "nav": [("home", "Home"), ("dates", "Dates"), ("guide", "Monday in BCN"), ("info", "Info")],
+  "soon_meta": ("Bad Decisions · Monday nights in Barcelona · Coming soon",
+                "Bad Decisions: a new Monday night party in Barcelona. Throwbacks, bad decisions and good stories. Coming soon. Follow us on Instagram."),
+  "soon_h1": "Coming <span class=\"brush\">soon.</span>", "soon_sub": "Every Monday · Barcelona",
+  "soon_tag": "The worst decision you'll make all week is almost here.", "soon_ig": "Follow us on Instagram",
   "free_list": "Free list", "join": "Join the free list", "tickets_from": f"Tickets from {PRICE_ADVANCE} €",
   "tickets": "Tickets", "buy": "Buy tickets", "lang_switch": ("ES", "es", "Ver en castellano"),
   "home_label": "Bad Decisions home", "coin": "3D Bad Decisions coin, drag to spin",
@@ -155,6 +167,10 @@ C = {
  },
  "es": {
   "nav": [("home", "Inicio"), ("dates", "Fechas"), ("guide", "Lunes en BCN"), ("info", "Info")],
+  "soon_meta": ("Bad Decisions · Fiesta de los lunes en Barcelona · Muy pronto",
+                "Bad Decisions: una nueva fiesta de los lunes en Barcelona. Throwbacks, malas decisiones y buenas historias. Muy pronto. Síguenos en Instagram."),
+  "soon_h1": "Muy <span class=\"brush\">pronto.</span>", "soon_sub": "Cada lunes · Barcelona",
+  "soon_tag": "La peor decisión que tomarás en toda la semana está a punto de llegar.", "soon_ig": "Síguenos en Instagram",
   "free_list": "Lista gratis", "join": "Apúntate a la lista gratis", "tickets_from": f"Entradas desde {PRICE_ADVANCE} €",
   "tickets": "Entradas", "buy": "Comprar entradas", "lang_switch": ("EN", "en", "View in English"),
   "home_label": "Bad Decisions inicio", "coin": "Moneda 3D de Bad Decisions, arrastra para girarla",
@@ -253,7 +269,7 @@ def url(page, lang):
     return SITE + "/" + PAGES[page][lang]
 
 
-def jsonld(page, lang):
+def jsonld(page, lang, soon=False):
     c = C[lang]
     org = {"@type": "Organization", "@id": SITE + "/#org", "name": "Bad Decisions", "url": SITE + "/",
            "logo": SITE + "/assets/img/logo-acid.png", "sameAs": [INSTAGRAM], "slogan": "Bad decisions, good stories."}
@@ -261,6 +277,8 @@ def jsonld(page, lang):
     place = {"@type": "Place", "name": VENUE["name"], "address": {"@type": "PostalAddress", "streetAddress": VENUE["street"],
              "addressLocality": VENUE["city"], "postalCode": VENUE["postal"], "addressCountry": "ES"}}
     graph = [org, web]
+    if soon:
+        return json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, indent=1)
     if page in ("home", "dates"):
         for e in EVENTS:
             n = e["date"] + dt.timedelta(1)
@@ -287,9 +305,9 @@ def jsonld(page, lang):
     return json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, indent=1)
 
 
-def head(page, lang, path):
+def head(page, lang, path, soon=False):
     c, p = C[lang], depth_prefix(path)
-    title, desc = c["meta"][page]
+    title, desc = c["soon_meta"] if soon else c["meta"][page]
     alt = "".join(f'<link rel="alternate" hreflang="{l}" href="{url(page, l)}">\n' for l in ("en", "es"))
     return f"""<!doctype html>
 <html lang="{lang}" data-tickets="{href(path, 'home', lang)}#tickets">
@@ -317,7 +335,7 @@ def head(page, lang, path):
 <link rel="preload" href="{p}assets/fonts/mplus-rounded-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{p}assets/site.css">
 <script type="application/ld+json">
-{jsonld(page, lang)}
+{jsonld(page, lang, soon)}
 </script>
 </head>
 <body>
@@ -519,6 +537,41 @@ def build_guide(lang, path):
     return page_hero(g["h1"], g["lede"]) + f'<section style="padding-top:10px"><div class="wrap"><article class="prose">{body}</article>{cta_band(lang)}</div></section>\n'
 
 
+def build_soon(lang, path):
+    c, p = C[lang], depth_prefix(path)
+    other = "es" if lang == "en" else "en"
+    code, hl, aria = c["lang_switch"]
+    return head("home", lang, path, soon=True) + f"""<header class="nav" id="nav">
+  <div class="wrap">
+    <span class="nav-logo"><img src="{p}assets/img/logo-acid.png" alt="Bad Decisions" width="1000" height="600"></span>
+    <a class="lang" style="margin-left:auto" href="{depth_prefix(path) + PAGES['home'][other] or './'}" hreflang="{hl}" lang="{hl}" aria-label="{aria}">{code}</a>
+  </div>
+</header>
+<main>
+<section class="hero soon">
+  <div class="floor" aria-hidden="true"></div>
+  <div class="halo" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <div class="scene" id="scene" aria-label="{c['coin']}" role="img">
+      <div class="coin" id="coin">
+        <div class="face front"><img src="{p}assets/img/smile-acid.png" alt="" width="650" height="640"></div>
+        <div class="face back"><img src="{p}assets/img/logo-acid.png" alt="" width="1000" height="600"></div>
+      </div>
+    </div>
+    <div class="shadow" aria-hidden="true"></div>
+    <h1>{c['soon_h1']}</h1>
+    <p class="soon-sub">{c['soon_sub']}</p>
+    <p class="soon-tag">{c['soon_tag']}</p>
+    <div class="ctas"><a class="btn btn-list btn-xl" href="{INSTAGRAM}" target="_blank" rel="noopener">{c['soon_ig']}</a></div>
+  </div>
+</section>
+</main>
+<script src="{p}assets/site.js" defer></script>
+</body>
+</html>
+"""
+
+
 BUILDERS = {"home": build_home, "dates": build_dates, "guide": build_guide, "info": build_info}
 
 
@@ -532,6 +585,8 @@ def write(path, content):
 def sitemap():
     rows = []
     for page, paths in PAGES.items():
+        if SHOW_SOON and page != "home":
+            continue
         for lang in ("en", "es"):
             alts = "".join(f'\n    <xhtml:link rel="alternate" hreflang="{l}" href="{url(page, l)}"/>' for l in ("en", "es"))
             alts += f'\n    <xhtml:link rel="alternate" hreflang="x-default" href="{url(page, "en")}"/>'
@@ -541,6 +596,15 @@ def sitemap():
 
 
 def llms():
+    if SHOW_SOON:
+        return f"""# Bad Decisions
+
+> Bad Decisions is a new Monday night party in Barcelona. Coming soon.
+
+- [Home]({url('home', 'en')})
+- [Inicio (español)]({url('home', 'es')})
+- [Instagram]({INSTAGRAM})
+"""
     first = EVENTS[0]["date"]
     return f"""# Bad Decisions
 
@@ -588,14 +652,32 @@ Allow: /
 Sitemap: https://baddecisionsbcn.com/sitemap.xml
 """
 
+def clean():
+    """Remove previously generated pages so switching modes never leaves stale pages behind."""
+    import shutil
+    for paths in PAGES.values():
+        for path in paths.values():
+            if path:
+                shutil.rmtree(os.path.join(OUT, path.split("/")[0]), ignore_errors=True)
+    for f in ("index.html",):
+        if os.path.exists(os.path.join(OUT, f)):
+            os.remove(os.path.join(OUT, f))
+
+
 if __name__ == "__main__":
-    for page, paths in PAGES.items():
-        for lang, path in paths.items():
-            write(path, head(page, lang, path) + nav(page, lang, path) + BUILDERS[page](lang, path) + footer(lang, path))
+    clean()
+    if SHOW_SOON:
+        for lang, path in PAGES["home"].items():
+            write(path, build_soon(lang, path))
+    else:
+        for page, paths in PAGES.items():
+            for lang, path in paths.items():
+                write(path, head(page, lang, path) + nav(page, lang, path) + BUILDERS[page](lang, path) + footer(lang, path))
     with open(os.path.join(OUT, "sitemap.xml"), "w") as f:
         f.write(sitemap())
     with open(os.path.join(OUT, "llms.txt"), "w") as f:
         f.write(llms())
     with open(os.path.join(OUT, "robots.txt"), "w") as f:
         f.write(ROBOTS)
-    print(f"Built {sum(len(v) for v in PAGES.values())} pages into {OUT}" + (" (local preview links)" if LOCAL else ""))
+    mode = "COMING SOON page" if SHOW_SOON else "full site"
+    print(f"Built {mode} into {OUT}" + (" (local preview links)" if LOCAL else ""))
