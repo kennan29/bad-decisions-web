@@ -93,10 +93,10 @@ C = {
   "h1": "The worst decision you'll make <span class=\"brush\">all week.</span>",
   "chip_free": f"Free list until <b>{FREE_UNTIL}</b>",
   "countdown": "Countdown to the next Monday", "cd": ["DAYS", "HRS", "MIN", "SEC"], "scroll": "Scroll down",
-  "how_eyebrow": "Monday night in Barcelona", "how_h2": "Nothing on a Monday? <span>Wrong.</span>",
+  "how_eyebrow": "Monday night in Barcelona", "how_h2": "Monday is a terrible day <span>to behave.</span>",
   "how": [("Pick your Monday", "Every Monday at Sala Apolo, from midnight to 5am. The night everyone says nothing's on.", "dates", "See dates →"),
           ("Get on the free list", f"Free entry until {FREE_UNTIL}. After that, tickets from {PRICE_ADVANCE} €.", "dice", "Free list →"),
-          ("Make bad decisions", "Bring your ID and your friends. Tomorrow can wait.", "info", "Practical info →")],
+          ("Don't come alone", "Drag your friends along. Someone has to remember what happened.", "share", "Send it to the group")],
   "dates_eyebrow": "Dates", "dates_h2": "Every Monday. <span>Pick your damage.</span>", "all_dates": "All dates →",
   "dow": "MON", "mon": ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
   "date_long": lambda d: d.strftime("Mon %-d %B %Y"),
@@ -177,10 +177,10 @@ C = {
   "h1": "La peor decisión que tomarás <span class=\"brush\">en toda la semana.</span>",
   "chip_free": f"Lista gratis hasta la <b>{FREE_UNTIL}</b>",
   "countdown": "Cuenta atrás para el próximo lunes", "cd": ["DÍAS", "HORAS", "MIN", "SEG"], "scroll": "Bajar",
-  "how_eyebrow": "Lunes noche en Barcelona", "how_h2": "¿Un lunes sin plan? <span>Error.</span>",
+  "how_eyebrow": "Lunes noche en Barcelona", "how_h2": "El lunes es mal día <span>para portarse bien.</span>",
   "how": [("Elige tu lunes", "Cada lunes en Sala Apolo, de 00:00 a 05:00. La noche en la que todo el mundo dice que no hay nada.", "dates", "Ver fechas →"),
           ("Apúntate a la lista", f"Entrada gratis hasta la {FREE_UNTIL}. Después, entradas desde {PRICE_ADVANCE} €.", "dice", "Lista gratis →"),
-          ("Toma malas decisiones", "Trae tu DNI y a tus amigos. Mañana puede esperar.", "info", "Info práctica →")],
+          ("No vengas solo", "Arrastra a tus amigos. Alguien tiene que acordarse mañana de lo que pasó.", "share", "Pásaselo al grupo")],
   "dates_eyebrow": "Fechas", "dates_h2": "Cada lunes. <span>Elige tu desastre.</span>", "all_dates": "Todas las fechas →",
   "dow": "LUN", "mon": ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"],
   "date_long": lambda d: f"Lun {d.day} de {['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][d.month-1]} de {d.year}",
@@ -251,6 +251,10 @@ C = {
  },
 }
 
+
+# Classic "share" icon (three connected dots)
+SHARE_ICON = ('<svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+              '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>')
 
 # ---------------------------------------------------------------- HELPERS
 def depth_prefix(path):
@@ -373,7 +377,7 @@ def footer(lang, path):
   <div class="wrap">
     <img src="{p}assets/img/smile-acid.png" alt="" width="650" height="640">
     <h2>{c['footer']}</h2>
-    <div class="socials"><a href="{INSTAGRAM}" target="_blank" rel="noopener">Instagram</a><a href="#" data-action="share">{c['share']}</a></div>
+    <div class="socials"><a href="{INSTAGRAM}" target="_blank" rel="noopener">Instagram</a><a href="#" class="share-inline" data-action="share">{SHARE_ICON}{c['share']}</a></div>
     <nav class="foot-links">{links}</nav>
     <p class="legal">{c['legal']}</p>
   </div>
@@ -400,7 +404,12 @@ def sec_how(lang, path):
     c = C[lang]
     cards = ""
     for i, (h, t, link, label) in enumerate(c["how"], 1):
-        a = f'<a data-dice href="#tickets">{label}</a>' if link == "dice" else f'<a href="{href(path, link, lang)}">{label}</a>'
+        if link == "share":
+            a = f'<button type="button" class="share-link" data-action="share">{SHARE_ICON}<span>{label}</span></button>'
+        elif link == "dice":
+            a = f'<a data-dice href="#tickets">{label}</a>'
+        else:
+            a = f'<a href="{href(path, link, lang)}">{label}</a>'
         cards += f'<article class="step tilt reveal"><div class="n">{i}</div><h3>{h}</h3><p>{t}</p>{a}</article>'
     return f"""<section id="how"><div class="wrap">
   <p class="eyebrow">{c['how_eyebrow']}</p>
