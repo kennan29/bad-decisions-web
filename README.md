@@ -16,3 +16,14 @@ Static website for Bad Decisions (every Monday at Sala Apolo, Barcelona). Englis
 The DICE link goes in `DICE_URL` at the top of `public/assets/site.js`.
 
 `python3 build.py --local` builds a version you can open by double-clicking (do not publish that one).
+
+## Coming soon mode
+`COMING_SOON = True` at the top of `build.py` makes the live site (branch `main`) show only the spinning coin and "Coming soon" (`/` and `/es/`).
+Set it to `False`, run `python3 build.py`, commit and push to launch the full site.
+
+The full site is always built for: `python3 build.py --local`, `python3 build.py --full`, and Cloudflare Pages preview builds of any branch other than `main`.
+
+## Cloudflare Pages settings
+- Framework preset: None
+- Build command: `python3 build.py`
+- Build output directory: `public`

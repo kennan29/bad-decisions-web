@@ -243,3 +243,8 @@ footer h2 span{color:var(--acid)}
 .foot-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:22px;font-size:.85rem}
 .foot-links a{color:var(--mute);text-decoration:none}
 .foot-links a:hover{color:var(--acid)}
+
+/* coming soon */
+.hero.soon h1{font-size:clamp(3.4rem,11vw,7.5rem)}
+.soon-sub{margin-top:18px;font-family:var(--head);font-size:clamp(1.1rem,2.6vw,1.5rem);letter-spacing:.12em;text-transform:uppercase;color:var(--acid)}
+.soon-tag{margin:10px 0 28px;color:var(--mute);max-width:46ch}
