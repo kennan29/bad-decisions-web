@@ -515,7 +515,7 @@ def build_home(lang, path):
     <h1>{c['h1']}</h1>
     <div class="meta">
       <span class="chip">📅 <b data-next-date>{c['dow']} 1 MAR</b> · <span data-next-name>Opening</span></span>
-      <a class="chip chip-link" href="{MAPS_URL}" target="_blank" rel="noopener" aria-label="Sala Apolo · Barcelona · {c['maps']}">📍 <u>Sala Apolo</u> · Barcelona</a>
+      <a class="chip chip-link" href="{MAPS_URL}" target="_blank" rel="noopener" aria-label="Sala Apolo · Barcelona · {c['maps']}">📍 Sala Apolo · Barcelona</a>
       <span class="chip">🎟 {c['chip_free']}</span>
     </div>
     <div class="ctas">{dice('btn-list btn-xl', c['join'])}{dice('btn-ticket btn-xl', c['tickets_from'])}</div>
