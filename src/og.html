@@ -13,6 +13,9 @@ body:before{content:"";position:absolute;width:70vmax;height:70vmax;right:-15vma
 .tall .box{flex-direction:column;text-align:center;gap:4vh}
 img{width:30vmin;filter:drop-shadow(0 0 4vmin #d8ff3e55)}
 .tall img{width:42vmin}
+.solo .box>div{display:none}
+.solo img{width:auto;height:72vh;filter:drop-shadow(0 0 6vmin #d8ff3e66)}
+.solo:before{right:auto;left:50%;top:50%;transform:translate(-50%,-50%);width:90vmax;height:90vmax}
 h1{font-family:Anton;font-weight:400;text-transform:uppercase;line-height:1.02;font-size:11vmin;letter-spacing:.005em}
 h1 span{color:#D8FF3E}
 .brush{font-family:Brush;color:#D8FF3E;font-size:6.2vmin;margin-top:1.5vmin;display:block}
@@ -28,5 +31,6 @@ p b{color:#D8FF3E}
     <p>Nou de la Rambla 113 · Barcelona<br>00:00–05:00 · Free list until <b>01:30</b></p>
   </div>
 </div>
-<script>if (innerHeight / innerWidth > 0.7) document.body.classList.add('tall');</script>
+<script>if (location.hash === '#solo') document.body.classList.add('solo');
+if (innerHeight / innerWidth > 0.7) document.body.classList.add('tall');</script>
 </body></html>
