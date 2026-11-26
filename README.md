@@ -30,3 +30,8 @@ Settings → Builds:
 - Deploy command: `npx wrangler deploy`
 - Non-production branch deploy command: `npx wrangler versions upload`
 - Root directory: `/`
+
+## Technical extras
+- `404.html` is generated on every build (absolute paths) and served by Cloudflare for unknown URLs (`not_found_handling` in `wrangler.jsonc`).
+- `_headers` (generated) sets security headers and long browser cache for fonts and CSS/JS (CSS/JS links carry a content hash `?v=`, so changes show up at once). Images are cached 30 days: if you replace an image, give it a new file name.
+- Images on the pages are WebP versions sized for display (`logo-acid-nav.webp`, `logo-acid.webp`, `smile-acid.webp`, `smile-acid-sm.webp`). PNGs stay for the OG image, favicons and JSON-LD logo.

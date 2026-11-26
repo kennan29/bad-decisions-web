@@ -252,7 +252,7 @@ footer h2 span{color:var(--acid)}
 /* mobile: the sticky bottom bar carries the CTAs, so the hero drops its own and the page tightens up */
 @media(max-width:760px){
   .hero{min-height:auto;padding:96px 0 28px}
-  .hero .ctas{display:none}
+  .hero:not(.soon) .ctas{display:none}
   .hero .countdown{margin-top:22px}
   .hero .scroll{display:none}
   .scene{width:min(240px,54vw);margin-bottom:14px}

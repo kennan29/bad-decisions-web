@@ -44,6 +44,16 @@ MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Sala+Apolo+Barcelona
 PRICE_ADVANCE, PRICE_DOOR, FREE_UNTIL = 11, 13, "01:30"
 VENUE = {"name": "Sala Apolo", "street": "Carrer Nou de la Rambla 113", "short": "C/ Nou de la Rambla 113",
          "postal": "08004", "city": "Barcelona"}
+import hashlib as _hl
+
+
+def _ver(name):
+    """Short content hash so browsers fetch CSS/JS again whenever they change (they are cached for a long time)."""
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "public", "assets", name), "rb") as f:
+        return _hl.md5(f.read()).hexdigest()[:8]
+
+
+V_CSS, V_JS = _ver("site.css"), _ver("site.js")
 INSTAGRAM = "https://www.instagram.com/baddecisionsbcn/"
 EMAIL = "info@baddecisionsbcn.com"
 
@@ -143,7 +153,7 @@ C = {
   "legal": "© 2026 BAD DECISIONS · Every Monday · Sala Apolo · Barcelona",
   "meta": {
    "home": ("Bad Decisions · Monday night party at Sala Apolo, Barcelona",
-            f"Bad Decisions: the Monday night party in Barcelona. Every Monday at Sala Apolo, midnight to 5am. Hip-hop, house and pop throwbacks. Free list until {FREE_UNTIL}, tickets from {PRICE_ADVANCE} €."),
+            f"The Monday night party in Barcelona: every Monday at Sala Apolo, midnight to 5am. Hip-hop, house and pop throwbacks. Free list until {FREE_UNTIL}, tickets from {PRICE_ADVANCE} €."),
    "dates": ("Dates · Bad Decisions, every Monday at Sala Apolo",
              f"All the upcoming Bad Decisions Mondays at Sala Apolo, Barcelona. Opening Monday 1 March 2027. Free list until {FREE_UNTIL}."),
    "guide": ("What to do in Barcelona on a Monday night · Bad Decisions",
@@ -238,7 +248,7 @@ C = {
   "legal": "© 2026 BAD DECISIONS · Cada lunes · Sala Apolo · Barcelona",
   "meta": {
    "home": ("Bad Decisions · Fiesta de los lunes en Sala Apolo, Barcelona",
-            f"Bad Decisions: la fiesta de los lunes en Barcelona. Cada lunes en Sala Apolo, de 00:00 a 05:00. Throwbacks de hip-hop, house y pop. Lista gratis hasta la {FREE_UNTIL}, entradas desde {PRICE_ADVANCE} €."),
+            f"La fiesta de los lunes en Barcelona: cada lunes en Sala Apolo, de 00:00 a 05:00. Throwbacks de hip-hop, house y pop. Lista gratis hasta la {FREE_UNTIL}, entradas desde {PRICE_ADVANCE} €."),
    "dates": ("Fechas · Bad Decisions, cada lunes en Sala Apolo",
              f"Todos los próximos lunes de Bad Decisions en Sala Apolo, Barcelona. Opening el lunes 1 de marzo de 2027. Lista gratis hasta la {FREE_UNTIL}."),
    "guide": ("Qué hacer un lunes por la noche en Barcelona · Bad Decisions",
@@ -332,6 +342,11 @@ def jsonld(page, lang, soon=False):
         graph.append({"@type": "Article", "headline": c["meta"]["guide"][0].split(" · ")[0], "description": c["meta"]["guide"][1],
                       "inLanguage": lang, "author": {"@id": SITE + "/#org"}, "publisher": {"@id": SITE + "/#org"},
                       "dateModified": BUILD_DATE, "mainEntityOfPage": url("guide", lang), "about": place})
+    if page != "home":
+        names = dict(c["nav"])
+        graph.append({"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": names["home"], "item": url("home", lang)},
+            {"@type": "ListItem", "position": 2, "name": names[page], "item": url(page, lang)}]})
     return json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, indent=1)
 
 
@@ -366,7 +381,7 @@ def head(page, lang, path, soon=False):
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="{p}assets/fonts/anton-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{p}assets/fonts/mplus-rounded-700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="{p}assets/site.css">
+<link rel="stylesheet" href="{p}assets/site.css?v={V_CSS}">
 <script type="application/ld+json">
 {jsonld(page, lang, soon)}
 </script>
@@ -387,7 +402,7 @@ def nav(page, lang, path):
     links = "".join(f'<li><a href="{href(path, k, lang)}"{cur if k == page else ""}>{t}</a></li>' for k, t in c["nav"])
     return f"""<header class="nav" id="nav">
   <div class="wrap">
-    <a href="{href(path, 'home', lang)}" class="nav-logo" aria-label="{c['home_label']}"><img src="{p}assets/img/logo-acid.png" alt="Bad Decisions" width="1000" height="600"></a>
+    <a href="{href(path, 'home', lang)}" class="nav-logo" aria-label="{c['home_label']}"><img src="{p}assets/img/logo-acid-nav.webp" alt="Bad Decisions" width="200" height="120"></a>
     <ul class="nav-links">{links}</ul>
     <a class="lang" href="{href(path, page, other)}" hreflang="{hl}" lang="{hl}" aria-label="{aria}">{code}</a>
     {dice('btn-list', c['free_list'])}
@@ -405,7 +420,7 @@ def footer(lang, path):
     return f"""</main>
 <footer>
   <div class="wrap">
-    <img src="{p}assets/img/smile-acid.png" alt="" width="650" height="640">
+    <img src="{p}assets/img/smile-acid-sm.webp" alt="" width="240" height="236" loading="lazy" decoding="async">
     <h2>{c['footer']}</h2>
     <div class="socials"><a href="{INSTAGRAM}" target="_blank" rel="noopener">Instagram</a><a href="mailto:{EMAIL}">{EMAIL}</a><a href="#" class="share-inline" data-action="share">{SHARE_ICON}{c['share']}</a></div>
     <nav class="foot-links">{links}</nav>
@@ -414,7 +429,7 @@ def footer(lang, path):
 </footer>
 <div class="mcta">{dice('btn-list', c['free_list'])}{dice('btn-ticket', c['tickets'])}</div>
 <script type="application/json" id="bd-events">{data}</script>
-<script src="{p}assets/site.js" defer></script>
+<script src="{p}assets/site.js?v={V_JS}" defer></script>
 </body>
 </html>
 """
@@ -552,8 +567,8 @@ def build_home(lang, path):
   <div class="wrap hero-inner">
     <div class="scene" id="scene" aria-label="{c['coin']}" role="img">
       <div class="coin" id="coin">
-        <div class="face front"><img src="{p}assets/img/smile-acid.png" alt="" width="650" height="640"></div>
-        <div class="face back"><img src="{p}assets/img/logo-acid.png" alt="" width="1000" height="600"></div>
+        <div class="face front"><img src="{p}assets/img/smile-acid.webp" alt="" width="650" height="640" fetchpriority="high"></div>
+        <div class="face back"><img src="{p}assets/img/logo-acid.webp" alt="" width="640" height="384"></div>
       </div>
     </div>
     <div class="shadow" aria-hidden="true"></div>
@@ -598,7 +613,7 @@ def build_soon(lang, path):
     code, hl, aria = c["lang_switch"]
     return head("home", lang, path, soon=True) + f"""<header class="nav" id="nav">
   <div class="wrap">
-    <span class="nav-logo"><img src="{p}assets/img/logo-acid.png" alt="Bad Decisions" width="1000" height="600"></span>
+    <span class="nav-logo"><img src="{p}assets/img/logo-acid-nav.webp" alt="Bad Decisions" width="200" height="120"></span>
     <a class="lang" style="margin-left:auto" href="{depth_prefix(path) + PAGES['home'][other] or './'}" hreflang="{hl}" lang="{hl}" aria-label="{aria}">{code}</a>
   </div>
 </header>
@@ -609,8 +624,8 @@ def build_soon(lang, path):
   <div class="wrap hero-inner">
     <div class="scene" id="scene" aria-label="{c['coin']}" role="img">
       <div class="coin" id="coin">
-        <div class="face front"><img src="{p}assets/img/smile-acid.png" alt="" width="650" height="640"></div>
-        <div class="face back"><img src="{p}assets/img/logo-acid.png" alt="" width="1000" height="600"></div>
+        <div class="face front"><img src="{p}assets/img/smile-acid.webp" alt="" width="650" height="640" fetchpriority="high"></div>
+        <div class="face back"><img src="{p}assets/img/logo-acid.webp" alt="" width="640" height="384"></div>
       </div>
     </div>
     <div class="shadow" aria-hidden="true"></div>
@@ -622,7 +637,7 @@ def build_soon(lang, path):
   </div>
 </section>
 </main>
-<script src="{p}assets/site.js" defer></script>
+<script src="{p}assets/site.js?v={V_JS}" defer></script>
 </body>
 </html>
 """
@@ -722,6 +737,68 @@ def clean():
             os.remove(os.path.join(OUT, f))
 
 
+def build_404():
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bad decision · Page not found · Bad Decisions</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B0B0B">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon-192.png">
+<link rel="preload" href="/assets/fonts/anton-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css?v={V_CSS}">
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="nav-logo" href="/"><img src="/assets/img/logo-acid-nav.webp" alt="Bad Decisions" width="200" height="120"></a>
+  </div>
+</header>
+<main>
+<section class="hero soon">
+  <div class="floor" aria-hidden="true"></div>
+  <div class="halo" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <div class="scene" id="scene" role="img" aria-label="Bad Decisions">
+      <div class="coin" id="coin">
+        <div class="face front"><img src="/assets/img/smile-acid.webp" alt="" width="650" height="640"></div>
+        <div class="face back"><img src="/assets/img/logo-acid.webp" alt="" width="640" height="384"></div>
+      </div>
+    </div>
+    <div class="shadow" aria-hidden="true"></div>
+    <h1>Bad <span class="brush">decision.</span></h1>
+    <p class="soon-sub">404 · This page doesn't exist</p>
+    <p class="soon-tag">Mala decisión: esta página no existe. Let's take you somewhere better.</p>
+    <div class="ctas"><a class="btn btn-list btn-xl" href="/">Go home</a><a class="btn btn-ticket btn-xl" href="/es/" lang="es">Ir al inicio</a></div>
+  </div>
+</section>
+</main>
+<script src="/assets/site.js?v={V_JS}" defer></script>
+</body>
+</html>
+"""
+
+
+HEADERS = """/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/site.*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/img/*
+  Cache-Control: public, max-age=2592000
+/favicon.ico
+  Cache-Control: public, max-age=604800
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+"""
+
+
 if __name__ == "__main__":
     clean()
     if SHOW_SOON:
@@ -737,5 +814,9 @@ if __name__ == "__main__":
         f.write(llms())
     with open(os.path.join(OUT, "robots.txt"), "w") as f:
         f.write(ROBOTS)
+    with open(os.path.join(OUT, "404.html"), "w") as f:
+        f.write(build_404())
+    with open(os.path.join(OUT, "_headers"), "w") as f:
+        f.write(HEADERS)
     mode = "COMING SOON page" if SHOW_SOON else "full site"
     print(f"Built {mode} into {OUT}" + (" (local preview links)" if LOCAL else ""))
