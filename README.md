@@ -21,9 +21,12 @@ The DICE link goes in `DICE_URL` at the top of `public/assets/site.js`.
 `COMING_SOON = True` at the top of `build.py` makes the live site (branch `main`) show only the spinning coin and "Coming soon" (`/` and `/es/`).
 Set it to `False`, run `python3 build.py`, commit and push to launch the full site.
 
-The full site is always built for: `python3 build.py --local`, `python3 build.py --full`, and Cloudflare Pages preview builds of any branch other than `main`.
+The full site is always built for: `python3 build.py --local`, `python3 build.py --full`, and Cloudflare preview builds of any branch other than `main`.
 
-## Cloudflare Pages settings
-- Framework preset: None
+## Cloudflare (Workers with static assets)
+The site is served by the Worker `bad-decisions-web`, configured in `wrangler.jsonc` (static files from `public/`).
+Settings → Builds:
 - Build command: `python3 build.py`
-- Build output directory: `public`
+- Deploy command: `npx wrangler deploy`
+- Non-production branch deploy command: `npx wrangler versions upload`
+- Root directory: `/`

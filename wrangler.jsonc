@@ -1,0 +1,8 @@
+// Cloudflare Workers (static assets). build.py writes the site into public/.
+{
+  "name": "bad-decisions-web",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./public"
+  }
+}
