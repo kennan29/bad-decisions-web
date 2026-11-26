@@ -85,7 +85,7 @@ button,input,select{font:inherit}
 /* sections */
 section{padding:110px 0 20px}
 .eyebrow{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acid);font-weight:700}
-.h2{font-family:var(--head);font-weight:400;font-size:clamp(2.4rem,6vw,4.2rem);line-height:1;letter-spacing:.005em;margin:10px 0 36px;text-transform:uppercase}
+.h2{font-family:var(--head);font-weight:400;font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.08;letter-spacing:.005em;margin:10px 0 36px;text-transform:uppercase}
 .h2 span{color:var(--mute)}
 .js-reveal .reveal{opacity:0;transform:translateY(30px) rotateX(12deg);transition:opacity .7s,transform .7s}
 .js-reveal .reveal.in{opacity:1;transform:none}
@@ -220,11 +220,11 @@ footer h2 span{color:var(--acid)}
 .more{margin-top:22px}
 .more a{color:var(--acid);text-decoration:none;font-weight:800}
 .page-hero{padding:150px 0 10px}
-.page-hero h1{font-family:var(--head);font-weight:400;font-size:clamp(2.8rem,8vw,5.6rem);line-height:.95;text-transform:uppercase;letter-spacing:.005em;max-width:18ch}
+.page-hero h1{font-family:var(--head);font-weight:400;font-size:clamp(2.8rem,8vw,5.6rem);line-height:1.06;text-transform:uppercase;letter-spacing:.005em;max-width:18ch}
 .page-hero h1 span{color:var(--acid)}
 .page-hero .lede{margin:22px 0 0;font-size:1.1rem}
 .prose{max-width:720px}
-.prose h2{font-family:var(--head);font-weight:400;font-size:clamp(1.8rem,4vw,2.6rem);text-transform:uppercase;line-height:1.05;margin:56px 0 14px;letter-spacing:.005em}
+.prose h2{font-family:var(--head);font-weight:400;font-size:clamp(1.8rem,4vw,2.6rem);text-transform:uppercase;line-height:1.1;margin:56px 0 14px;letter-spacing:.005em}
 .prose h2 span{color:var(--acid)}
 .prose p,.prose li{color:#d9d4ca;font-weight:500;font-size:1.05rem}
 .prose p+p{margin-top:14px}
@@ -237,7 +237,7 @@ footer h2 span{color:var(--acid)}
 .timeline li{display:grid;grid-template-columns:86px 1fr;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
 .timeline b{font-family:var(--head);font-weight:400;font-size:1.3rem;color:var(--acid);letter-spacing:.02em}
 .cta-band{margin-top:64px;text-align:center;background:linear-gradient(160deg,#171717,#0e0e0e);border:1px solid var(--line);border-radius:28px;padding:40px 22px}
-.cta-band h2{font-family:var(--head);font-weight:400;font-size:clamp(2rem,5vw,3.2rem);text-transform:uppercase;line-height:1}
+.cta-band h2{font-family:var(--head);font-weight:400;font-size:clamp(2rem,5vw,3.2rem);text-transform:uppercase;line-height:1.08}
 .cta-band h2 span{color:var(--acid)}
 .cta-band .ctas{margin-top:22px}
 .foot-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:22px;font-size:.85rem}
