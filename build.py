@@ -349,7 +349,10 @@ def head(page, lang, path, soon=False):
 <link rel="canonical" href="{url(page, lang)}">
 {alt}<link rel="alternate" hreflang="x-default" href="{url(page, 'en')}">
 <meta name="theme-color" content="#0B0B0B">
+<link rel="icon" href="{p}favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="32x32" href="{p}assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="{p}assets/img/favicon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="{p}assets/img/favicon-96.png">
 <link rel="icon" type="image/png" sizes="192x192" href="{p}assets/img/favicon-192.png">
 <link rel="apple-touch-icon" href="{p}assets/img/apple-touch-icon.png">
 <meta property="og:type" content="website">
