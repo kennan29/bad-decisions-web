@@ -12,6 +12,7 @@ No dependencies beyond Python 3.
 import datetime as dt
 import html
 import json
+from urllib.parse import quote
 import os
 import sys
 
@@ -39,10 +40,12 @@ SPECIALS = {                   # themed nights: date -> {"name":..., "tag_en":..
 }
 TAGS = ["Monday is a terrible day to behave.", "You have work tomorrow. So what?", "Same songs. New stories.",
         "Don't blame us tomorrow.", "Good music. Better company."]
+MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Sala+Apolo+Barcelona"
 PRICE_ADVANCE, PRICE_DOOR, FREE_UNTIL = 11, 13, "01:30"
 VENUE = {"name": "Sala Apolo", "street": "Carrer Nou de la Rambla 113", "short": "C/ Nou de la Rambla 113",
          "postal": "08004", "city": "Barcelona"}
 INSTAGRAM = "https://www.instagram.com/baddecisionsbcn/"
+EMAIL = "info@baddecisionsbcn.com"
 
 # page key -> path per language
 PAGES = {
@@ -125,6 +128,17 @@ C = {
   ],
   "where_facts": [("Monday", "every week"), ("00:00–05:00", "doors to close"), (FREE_UNTIL, "free list until"), ("18+", "bring your ID")],
   "maps": "Open in maps", "getting_there": "Metro Paral·lel (L2, L3)",
+  "contact_eyebrow": "Contact", "contact_h2": "Talk to us. <span>Before or after.</span>",
+  "contact_intro": "Everything goes to one inbox. Pick a reason so your email lands in the right place. For quick questions, a DM on Instagram is faster.",
+  "contact": [
+   ("Groups & birthdays", "Coming with a big crew or celebrating something? Tell us the date and how many of you are coming.", "Group / birthday"),
+   ("Press", "Interviews, features or photo requests.", "Press"),
+   ("Promoters & brands", "Collabs, partnerships and sponsorship.", "Promoters & brands"),
+   ("Artists & DJs", "Want to play? Send us a link to your sets.", "Artists & DJs"),
+   ("Anything else", "Questions, ideas or love letters.", "Hello"),
+  ],
+  "contact_ig": ("Instagram", "The fast lane for short questions."),
+  "contact_write": "Write to us",
   "footer": "Tomorrow <span class=\"brush\">can wait.</span>", "share": "Share",
   "legal": "© 2026 BAD DECISIONS · Every Monday · Sala Apolo · Barcelona",
   "meta": {
@@ -135,10 +149,10 @@ C = {
    "guide": ("What to do in Barcelona on a Monday night · Bad Decisions",
              "Monday night in Barcelona: where to go out, what time, how to get there and how to get in free. A local guide to the best plan for a Monday in Barcelona."),
    "info": ("Info & FAQ · Bad Decisions at Sala Apolo, Barcelona",
-            f"Everything you need for Bad Decisions: address, opening hours, free list, prices, dress code, ID and how to get to Sala Apolo."),
+            f"Everything you need for Bad Decisions: address, opening hours, free list, prices, dress code, ID, how to get to Sala Apolo and contact."),
   },
   "dates_page": ("Every Monday. <span>Pick your damage.</span>", f"Bad Decisions happens every Monday night at Sala Apolo, Barcelona, from midnight to 5am. Pick your Monday, get on the free list and be there before {FREE_UNTIL}."),
-  "info_page": ("The boring stuff. <span>Quickly.</span>", "Address, times, prices, dress code and how to get there. Everything you need before your next bad decision."),
+  "info_page": ("The boring stuff. <span>Quickly.</span>", "Address, times, prices, dress code, how to get there and how to reach us. Everything you need before your next bad decision."),
   "cta_band": "Your next Monday <span>is sorted.</span>",
   "guide_page": {
    "h1": "What to do in Barcelona <span>on a Monday night</span>",
@@ -209,6 +223,17 @@ C = {
   ],
   "where_facts": [("Lunes", "cada semana"), ("00:00–05:00", "apertura a cierre"), (FREE_UNTIL, "lista gratis hasta"), ("+18", "trae tu DNI")],
   "maps": "Abrir en Maps", "getting_there": "Metro Paral·lel (L2, L3)",
+  "contact_eyebrow": "Contacto", "contact_h2": "Escríbenos. <span>Antes o después.</span>",
+  "contact_intro": "Todo llega al mismo correo. Elige el motivo para que tu mensaje vaya al sitio correcto. Para dudas rápidas, un mensaje por Instagram es más rápido.",
+  "contact": [
+   ("Grupos y cumpleaños", "¿Venís muchos o celebráis algo? Dinos la fecha y cuántos sois.", "Grupo / cumpleaños"),
+   ("Prensa", "Entrevistas, reportajes o fotos.", "Prensa"),
+   ("Promotores y marcas", "Colaboraciones y patrocinios.", "Promotores y marcas"),
+   ("Artistas y DJs", "¿Quieres pinchar? Mándanos un enlace a tus sesiones.", "Artistas y DJs"),
+   ("Otras cosas", "Dudas, ideas o cartas de amor.", "Hola"),
+  ],
+  "contact_ig": ("Instagram", "La vía rápida para dudas cortas."),
+  "contact_write": "Escríbenos",
   "footer": "Mañana <span class=\"brush\">puede esperar.</span>", "share": "Compartir",
   "legal": "© 2026 BAD DECISIONS · Cada lunes · Sala Apolo · Barcelona",
   "meta": {
@@ -219,10 +244,10 @@ C = {
    "guide": ("Qué hacer un lunes por la noche en Barcelona · Bad Decisions",
              "Lunes noche en Barcelona: dónde salir, a qué hora, cómo llegar y cómo entrar gratis. La guía para el mejor plan de un lunes en Barcelona."),
    "info": ("Info y FAQ · Bad Decisions en Sala Apolo, Barcelona",
-            "Todo lo que necesitas para Bad Decisions: dirección, horario, lista gratis, precios, dress code, DNI y cómo llegar a Sala Apolo."),
+            "Todo lo que necesitas para Bad Decisions: dirección, horario, lista gratis, precios, dress code, DNI, cómo llegar a Sala Apolo y contacto."),
   },
   "dates_page": ("Cada lunes. <span>Elige tu desastre.</span>", f"Bad Decisions es cada lunes por la noche en Sala Apolo, Barcelona, de 00:00 a 05:00. Elige tu lunes, apúntate a la lista gratis y llega antes de la {FREE_UNTIL}."),
-  "info_page": ("Lo aburrido. <span>Rápido.</span>", "Dirección, horarios, precios, dress code y cómo llegar. Todo lo que necesitas antes de tu próxima mala decisión."),
+  "info_page": ("Lo aburrido. <span>Rápido.</span>", "Dirección, horarios, precios, dress code, cómo llegar y cómo contactarnos. Todo lo que necesitas antes de tu próxima mala decisión."),
   "cta_band": "Tu próximo lunes <span>ya tiene plan.</span>",
   "guide_page": {
    "h1": "Qué hacer en Barcelona <span>un lunes por la noche</span>",
@@ -276,7 +301,8 @@ def url(page, lang):
 def jsonld(page, lang, soon=False):
     c = C[lang]
     org = {"@type": "Organization", "@id": SITE + "/#org", "name": "Bad Decisions", "url": SITE + "/",
-           "logo": SITE + "/assets/img/logo-acid.png", "sameAs": [INSTAGRAM], "slogan": "Bad decisions, good stories."}
+           "logo": SITE + "/assets/img/logo-acid.png", "sameAs": [INSTAGRAM], "slogan": "Bad decisions, good stories.", "email": EMAIL,
+           "contactPoint": {"@type": "ContactPoint", "contactType": "customer support", "email": EMAIL, "availableLanguage": ["en", "es"]}}
     web = {"@type": "WebSite", "@id": SITE + "/#web", "name": "Bad Decisions", "url": SITE + "/", "inLanguage": ["en", "es"], "publisher": {"@id": SITE + "/#org"}}
     place = {"@type": "Place", "name": VENUE["name"], "address": {"@type": "PostalAddress", "streetAddress": VENUE["street"],
              "addressLocality": VENUE["city"], "postalCode": VENUE["postal"], "addressCountry": "ES"}}
@@ -371,13 +397,14 @@ def nav(page, lang, path):
 def footer(lang, path):
     c, p = C[lang], depth_prefix(path)
     links = "".join(f'<a href="{href(path, k, lang)}">{t}</a>' for k, t in c["nav"])
+    links += f'<a href="{href(path, "info", lang)}#contact">{c["contact_eyebrow"]}</a>'
     data = json.dumps([{"id": e["id"], "name": e["name"], "tag": e["tag_" + lang], "special": e["special"]} for e in EVENTS], ensure_ascii=False)
     return f"""</main>
 <footer>
   <div class="wrap">
     <img src="{p}assets/img/smile-acid.png" alt="" width="650" height="640">
     <h2>{c['footer']}</h2>
-    <div class="socials"><a href="{INSTAGRAM}" target="_blank" rel="noopener">Instagram</a><a href="#" class="share-inline" data-action="share">{SHARE_ICON}{c['share']}</a></div>
+    <div class="socials"><a href="{INSTAGRAM}" target="_blank" rel="noopener">Instagram</a><a href="mailto:{EMAIL}">{EMAIL}</a><a href="#" class="share-inline" data-action="share">{SHARE_ICON}{c['share']}</a></div>
     <nav class="foot-links">{links}</nav>
     <p class="legal">{c['legal']}</p>
   </div>
@@ -480,10 +507,26 @@ def sec_info(lang, path, full):
       <h3>{VENUE['name']}</h3>
       <p>{VENUE['short']}, {VENUE['postal']} {VENUE['city']}<br>{c['getting_there']}</p>
       <div class="facts">{facts}</div>
-      <a class="btn btn-ticket" href="https://maps.google.com/?q=Sala+Apolo+Barcelona" target="_blank" rel="noopener">{c['maps']}</a>
+      <a class="btn btn-ticket" href="{MAPS_URL}" target="_blank" rel="noopener">{c['maps']}</a>
     </div>
     <div class="reveal">{det}{more}</div>
   </div>
+</div></section>
+"""
+
+
+def sec_contact(lang):
+    c = C[lang]
+    cards = "".join(
+        f'<a class="contact-card reveal" href="mailto:{EMAIL}?subject={quote(subj + " · Bad Decisions")}"><b>{t}</b><p>{d}</p><span>{c["contact_write"]} →</span></a>'
+        for t, d, subj in c["contact"])
+    ig_t, ig_d = c["contact_ig"]
+    cards += f'<a class="contact-card ig reveal" href="{INSTAGRAM}" target="_blank" rel="noopener"><b>{ig_t}</b><p>{ig_d}</p><span>@baddecisionsbcn →</span></a>'
+    return f"""<section id="contact"><div class="wrap">
+  <p class="eyebrow">{c['contact_eyebrow']}</p><h2 class="h2">{c['contact_h2']}</h2>
+  <p class="contact-intro">{c['contact_intro']}</p>
+  <div class="contact-grid">{cards}</div>
+  <p class="contact-mail"><a href="mailto:{EMAIL}">{EMAIL}</a></p>
 </div></section>
 """
 
@@ -514,7 +557,7 @@ def build_home(lang, path):
     <h1>{c['h1']}</h1>
     <div class="meta">
       <span class="chip">📅 <b data-next-date>{c['dow']} 1 MAR</b> · <span data-next-name>Opening</span></span>
-      <span class="chip">📍 Sala Apolo · Barcelona</span>
+      <a class="chip chip-link" href="{MAPS_URL}" target="_blank" rel="noopener" aria-label="Sala Apolo · Barcelona · {c['maps']}">📍 Sala Apolo · Barcelona</a>
       <span class="chip">🎟 {c['chip_free']}</span>
     </div>
     <div class="ctas">{dice('btn-list btn-xl', c['join'])}{dice('btn-ticket btn-xl', c['tickets_from'])}</div>
@@ -535,7 +578,7 @@ def build_dates(lang, path):
 
 def build_info(lang, path):
     h1, lede = C[lang]["info_page"]
-    return page_hero(h1, lede) + sec_info(lang, path, True) + f'<section style="padding-top:20px"><div class="wrap">{cta_band(lang)}</div></section>\n'
+    return page_hero(h1, lede) + sec_info(lang, path, True) + sec_contact(lang) + f'<section style="padding-top:20px"><div class="wrap">{cta_band(lang)}</div></section>\n'
 
 
 def build_guide(lang, path):
@@ -572,6 +615,7 @@ def build_soon(lang, path):
     <p class="soon-sub">{c['soon_sub']}</p>
     <p class="soon-tag">{c['soon_tag']}</p>
     <div class="ctas"><a class="btn btn-list btn-xl" href="{INSTAGRAM}" target="_blank" rel="noopener">{c['soon_ig']}</a></div>
+    <p class="soon-mail"><a href="mailto:{EMAIL}">{EMAIL}</a></p>
   </div>
 </section>
 </main>
@@ -613,6 +657,7 @@ def llms():
 - [Home]({url('home', 'en')})
 - [Inicio (español)]({url('home', 'es')})
 - [Instagram]({INSTAGRAM})
+- Contact: {EMAIL}
 """
     first = EVENTS[0]["date"]
     return f"""# Bad Decisions
@@ -634,6 +679,7 @@ def llms():
 - [Inicio (español)]({url('home', 'es')})
 - [Qué hacer un lunes por la noche en Barcelona]({url('guide', 'es')})
 - [Instagram]({INSTAGRAM})
+- Contact (groups, press, promoters, artists): {EMAIL}
 """
 
 
