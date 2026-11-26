@@ -310,10 +310,11 @@ def url(page, lang):
 
 def jsonld(page, lang, soon=False):
     c = C[lang]
-    org = {"@type": "Organization", "@id": SITE + "/#org", "name": "Bad Decisions", "url": SITE + "/",
+    org = {"@type": "Organization", "@id": SITE + "/#org", "name": "Bad Decisions", "alternateName": "Bad Decisions BCN", "url": SITE + "/",
+           "image": SITE + "/assets/img/event-1x1.jpg", "description": "Monday night party in Barcelona, every Monday at Sala Apolo.",
            "logo": SITE + "/assets/img/logo-acid.png", "sameAs": [INSTAGRAM], "slogan": "Bad decisions, good stories.", "email": EMAIL,
            "contactPoint": {"@type": "ContactPoint", "contactType": "customer support", "email": EMAIL, "availableLanguage": ["en", "es"]}}
-    web = {"@type": "WebSite", "@id": SITE + "/#web", "name": "Bad Decisions", "url": SITE + "/", "inLanguage": ["en", "es"], "publisher": {"@id": SITE + "/#org"}}
+    web = {"@type": "WebSite", "@id": SITE + "/#web", "name": "Bad Decisions", "alternateName": ["Bad Decisions BCN", "Bad Decisions Barcelona"], "url": SITE + "/", "inLanguage": ["en", "es"], "publisher": {"@id": SITE + "/#org"}}
     place = {"@type": "Place", "name": VENUE["name"], "address": {"@type": "PostalAddress", "streetAddress": VENUE["street"],
              "addressLocality": VENUE["city"], "postalCode": VENUE["postal"], "addressCountry": "ES"}}
     graph = [org, web]
@@ -330,7 +331,7 @@ def jsonld(page, lang, soon=False):
             graph.append({"@type": "MusicEvent", "name": "Bad Decisions · " + ("The Opening" if e["special"] else "Bad Monday"),
                           "description": desc, "startDate": f"{n.isoformat()}T00:00:00{z}", "endDate": f"{n.isoformat()}T05:00:00{z}",
                           "eventStatus": "https://schema.org/EventScheduled", "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-                          "location": place, "image": [SITE + "/assets/img/og-image.png"], "typicalAgeRange": "18-",
+                          "location": place, "image": [SITE + "/assets/img/event-1x1.jpg", SITE + "/assets/img/event-4x3.jpg", SITE + "/assets/img/event-16x9.jpg"], "typicalAgeRange": "18-",
                           "organizer": {"@id": SITE + "/#org"}, "performer": {"@type": "PerformingGroup", "name": "Bad Decisions resident DJ"},
                           "offers": [{"@type": "Offer", "name": c["prices"][0][0], "price": "0", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": tickets_url, "validFrom": "2026-12-01T00:00:00+01:00"},
                                      {"@type": "Offer", "name": c["prices"][1][0], "price": str(PRICE_ADVANCE), "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "url": tickets_url, "validFrom": "2026-12-01T00:00:00+01:00"}]})
@@ -373,11 +374,13 @@ def head(page, lang, path, soon=False):
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Bad Decisions">
 <meta property="og:locale" content="{'en_GB' if lang == 'en' else 'es_ES'}">
+<meta property="og:locale:alternate" content="{'es_ES' if lang == 'en' else 'en_GB'}">
 <meta property="og:url" content="{url(page, lang)}">
 <meta property="og:title" content="{E(title)}">
 <meta property="og:description" content="{E(desc)}">
 <meta property="og:image" content="{SITE}/assets/img/og-image.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Bad Decisions · Every Monday at Sala Apolo, Barcelona">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="{p}assets/fonts/anton-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{p}assets/fonts/mplus-rounded-700.woff2" as="font" type="font/woff2" crossorigin>

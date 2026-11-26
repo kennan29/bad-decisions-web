@@ -1,0 +1,32 @@
+<!doctype html>
+<!-- Template for the social / event images. Rendered by src/make_images.js at several sizes. -->
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Anton;src:url(../public/assets/fonts/anton-400.woff2)}
+@font-face{font-family:Rounded;src:url(../public/assets/fonts/mplus-rounded-700.woff2);font-weight:700}
+@font-face{font-family:Brush;src:url(../public/assets/fonts/permanent-marker-400.woff2)}
+*{margin:0;box-sizing:border-box}
+html,body{width:100%;height:100%}
+body{background:#0B0B0B;color:#F5F0E7;font-family:Rounded;font-weight:700;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+body:before{content:"";position:absolute;width:70vmax;height:70vmax;right:-15vmax;top:-25vmax;background:radial-gradient(circle,#d8ff3e2e,transparent 60%)}
+.box{display:flex;align-items:center;gap:5vw;padding:6vw;position:relative}
+.tall .box{flex-direction:column;text-align:center;gap:4vh}
+img{width:30vmin;filter:drop-shadow(0 0 4vmin #d8ff3e55)}
+.tall img{width:42vmin}
+h1{font-family:Anton;font-weight:400;text-transform:uppercase;line-height:1.02;font-size:11vmin;letter-spacing:.005em}
+h1 span{color:#D8FF3E}
+.brush{font-family:Brush;color:#D8FF3E;font-size:6.2vmin;margin-top:1.5vmin;display:block}
+p{color:#b9b4ab;font-size:4.2vmin;margin-top:2.4vmin;line-height:1.35}
+p b{color:#D8FF3E}
+</style></head>
+<body>
+<div class="box">
+  <img src="../public/assets/img/smile-acid.png" alt="">
+  <div>
+    <h1>Every Monday.<br><span>Sala Apolo.</span></h1>
+    <span class="brush">Bad decisions, good stories.</span>
+    <p>Barcelona · 00:00–05:00<br>Free list until <b>01:30</b> · Opening <b>1 March</b></p>
+  </div>
+</div>
+<script>if (innerHeight / innerWidth > 0.7) document.body.classList.add('tall');</script>
+</body></html>
