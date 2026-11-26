@@ -24,7 +24,7 @@ LOCAL = "--local" in sys.argv
 # False = the full website goes live.
 # Local previews (--local), --full, and Cloudflare preview builds of any other branch always show the full site.
 COMING_SOON = True
-_branch = os.environ.get("CF_PAGES_BRANCH")
+_branch = os.environ.get("CF_PAGES_BRANCH") or os.environ.get("WORKERS_CI_BRANCH")
 SHOW_SOON = COMING_SOON and not LOCAL and "--full" not in sys.argv and (_branch in (None, "", "main"))
 SITE = "https://baddecisionsbcn.com"
 BUILD_DATE = dt.date.today().isoformat()
