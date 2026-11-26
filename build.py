@@ -342,7 +342,7 @@ def jsonld(page, lang, soon=False):
         g = c["guide_page"]
         graph.append({"@type": "Article", "headline": c["meta"]["guide"][0].split(" · ")[0], "description": c["meta"]["guide"][1],
                       "inLanguage": lang, "author": {"@id": SITE + "/#org"}, "publisher": {"@id": SITE + "/#org"},
-                      "dateModified": BUILD_DATE, "mainEntityOfPage": url("guide", lang), "about": place})
+                      "image": SITE + "/assets/img/event-16x9.jpg", "datePublished": "2026-11-25", "dateModified": BUILD_DATE, "mainEntityOfPage": url("guide", lang), "about": place})
     if page != "home":
         names = dict(c["nav"])
         graph.append({"@type": "BreadcrumbList", "itemListElement": [
