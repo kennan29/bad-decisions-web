@@ -160,7 +160,7 @@ C = {
    "dates": ("Dates · Bad Decisions, every Monday at Sala Apolo",
              f"All the upcoming Bad Decisions Mondays at Sala Apolo, Barcelona. Opening Monday 1 March 2027. Free list until {FREE_UNTIL}."),
    "guide": ("What to do in Barcelona on a Monday night · Bad Decisions",
-             "Monday night in Barcelona: where to go out, what time, how to get there and how to get in free. A local guide to the best plan for a Monday in Barcelona."),
+             "Going out in Barcelona tonight, on a Monday? Where the party is, clubs open on Mondays, times, how to get there and how to get in free."),
    "info": ("Info & FAQ · Bad Decisions at Sala Apolo, Barcelona",
             f"Everything you need for Bad Decisions: address, opening hours, free list, prices, dress code, ID, how to get to Sala Apolo and contact."),
   },
@@ -169,7 +169,7 @@ C = {
   "cta_band": "Your next Monday <span>is sorted.</span>",
   "guide_page": {
    "h1": "What to do in Barcelona <span>on a Monday night</span>",
-   "lede": "Monday is the quietest night in Barcelona. Most people think nothing's on. Here's the plan when you still want to go out.",
+   "lede": "Monday is Barcelona's quietest night and many clubs are closed. If it's Monday and you want to go out tonight, here's the plan.",
    "answer": f"<strong>Short answer:</strong> go to <strong>Bad Decisions</strong>, the Monday night party at <strong>Sala Apolo</strong> ({VENUE['short']}, Poble-sec). Every Monday from <strong>midnight to 5am</strong>, with hip-hop, house and pop throwbacks. <strong>Free list until {FREE_UNTIL}</strong>, tickets from {PRICE_ADVANCE} €. 18+.",
    "sections": [
     ("Is there nightlife in Barcelona <span>on Mondays?</span>",
@@ -255,16 +255,16 @@ C = {
    "dates": ("Fechas · Bad Decisions, cada lunes en Sala Apolo",
              f"Todos los próximos lunes de Bad Decisions en Sala Apolo, Barcelona. Opening el lunes 1 de marzo de 2027. Lista gratis hasta la {FREE_UNTIL}."),
    "guide": ("Qué hacer un lunes por la noche en Barcelona · Bad Decisions",
-             "Lunes noche en Barcelona: dónde salir, a qué hora, cómo llegar y cómo entrar gratis. La guía para el mejor plan de un lunes en Barcelona."),
+             "¿Sales hoy lunes en Barcelona? Dónde hay fiesta, discotecas abiertas los lunes, horarios, cómo llegar y cómo entrar gratis."),
    "info": ("Info y FAQ · Bad Decisions en Sala Apolo, Barcelona",
             "Todo lo que necesitas para Bad Decisions: dirección, horario, lista gratis, precios, dress code, DNI, cómo llegar a Sala Apolo y contacto."),
   },
   "dates_page": ("Cada lunes. <span>Elige tu desastre.</span>", f"Bad Decisions es cada lunes por la noche en Sala Apolo, Barcelona, de 00:00 a 05:00. Elige tu lunes, apúntate a la lista gratis y llega antes de la {FREE_UNTIL}."),
   "info_page": ("Lo aburrido. <span>Rápido.</span>", "Dirección, horarios, precios, dress code, cómo llegar y cómo contactarnos. Todo lo que necesitas antes de tu próxima mala decisión."),
-  "cta_band": "Tu próximo lunes <span>ya tiene plan.</span>",
+  "cta_band": "El próximo lunes <span>ya tienes plan.</span>",
   "guide_page": {
    "h1": "Qué hacer en Barcelona <span>un lunes por la noche</span>",
-   "lede": "El lunes es la noche más tranquila de Barcelona. Casi todo el mundo piensa que no hay nada. Este es el plan si aun así quieres salir.",
+   "lede": "El lunes es la noche más tranquila de Barcelona y muchas discotecas cierran. Si es lunes y quieres salir hoy, este es el plan.",
    "answer": f"<strong>Respuesta corta:</strong> ven a <strong>Bad Decisions</strong>, la fiesta de los lunes en <strong>Sala Apolo</strong> ({VENUE['short']}, Poble-sec). Cada lunes de <strong>00:00 a 05:00</strong>, con throwbacks de hip-hop, house y pop. <strong>Lista gratis hasta la {FREE_UNTIL}</strong>, entradas desde {PRICE_ADVANCE} €. +18.",
    "sections": [
     ("¿Hay fiesta en Barcelona <span>los lunes?</span>",
