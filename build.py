@@ -173,7 +173,7 @@ C = {
    "answer": f"<strong>Short answer:</strong> go to <strong>Bad Decisions</strong>, the Monday night party at <strong>Sala Apolo</strong> ({VENUE['short']}, Poble-sec). Every Monday from <strong>midnight to 5am</strong>, with hip-hop, house and pop throwbacks. <strong>Free list until {FREE_UNTIL}</strong>, tickets from {PRICE_ADVANCE} €. 18+.",
    "sections": [
     ("Is there nightlife in Barcelona <span>on Mondays?</span>",
-     ["<p>Yes, but not much. Most clubs in Barcelona open Thursday to Saturday and many are closed on Mondays, so it's the quietest night of the week. That's exactly why we picked it: <strong>Bad Decisions is Barcelona's Monday night party</strong>.</p>",
+     ["<p>Yes, but not much. Most clubs in Barcelona open Thursday to Saturday and many are closed on Mondays, so it's the quietest night of the week. That's exactly why we picked it: <strong>Bad Decisions is Barcelona's Monday night party, at Sala Apolo</strong>.</p>",
       "<p>Monday is the night for people who don't run on a normal calendar: students and Erasmus, travellers, expats, and everyone who works in hospitality and has Monday and Tuesday off.</p>"]),
     ("A Monday night in Barcelona, <span>hour by hour</span>",
      ["<p>Barcelona runs late. A good Monday looks like this:</p>",
@@ -268,7 +268,7 @@ C = {
    "answer": f"<strong>Respuesta corta:</strong> ven a <strong>Bad Decisions</strong>, la fiesta de los lunes en <strong>Sala Apolo</strong> ({VENUE['short']}, Poble-sec). Cada lunes de <strong>00:00 a 05:00</strong>, con throwbacks de hip-hop, house y pop. <strong>Lista gratis hasta la {FREE_UNTIL}</strong>, entradas desde {PRICE_ADVANCE} €. +18.",
    "sections": [
     ("¿Hay fiesta en Barcelona <span>los lunes?</span>",
-     ["<p>Sí, pero poca. La mayoría de discotecas de Barcelona abren de jueves a sábado y muchas cierran los lunes, así que es la noche más tranquila de la semana. Por eso la elegimos: <strong>Bad Decisions es la fiesta de los lunes en Barcelona</strong>.</p>",
+     ["<p>Sí, pero poca. La mayoría de discotecas de Barcelona abren de jueves a sábado y muchas cierran los lunes, así que es la noche más tranquila de la semana. Por eso la elegimos: <strong>Bad Decisions es la fiesta de los lunes en Barcelona, en Sala Apolo</strong>.</p>",
       "<p>El lunes es la noche de la gente que no vive con un calendario normal: estudiantes y Erasmus, viajeros, expats y todo el que trabaja en hostelería y libra lunes y martes.</p>"]),
     ("Un lunes noche en Barcelona, <span>hora a hora</span>",
      ["<p>Barcelona va tarde. Un buen lunes es así:</p>",
