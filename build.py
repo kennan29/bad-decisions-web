@@ -177,7 +177,7 @@ C = {
       "<p>Monday is the night for people who don't run on a normal calendar: students and Erasmus, travellers, expats, and everyone who works in hospitality and has Monday and Tuesday off.</p>"]),
     ("A Monday night in Barcelona, <span>hour by hour</span>",
      ["<p>Barcelona runs late. A good Monday looks like this:</p>",
-      "<ul class=\"timeline\"><li><b>21:30</b><span>Late dinner. Poble-sec, right next to Sala Apolo, is full of places to eat, especially around Carrer de Blai, but Barcelona is one of the best food cities in the world, so any neighbourhood works. You can get here by metro from anywhere: Paral·lel station (L2 and L3) is two minutes from the venue. Just don't get distracted: on weekdays the last metro runs at around midnight.</span></li>"
+      "<ul class=\"timeline\"><li><b>21:30</b><span>Late dinner. Poble-sec, right next to Sala Apolo, is full of places to eat, especially around Carrer de Blai, but Barcelona is one of the best food cities in the world, so any neighbourhood works. You can get here by metro from anywhere: Paral·lel station (L2 and L3) is two minutes from the venue. Just don't get distracted: Monday to Thursday the metro closes at midnight, so come before then.</span></li>"
       "<li><b>00:00</b><span>Doors open at Sala Apolo. Bad Decisions, Barcelona's Monday night party, starts.</span></li>"
       f"<li><b>{FREE_UNTIL}</b><span>Last call for the free list. After this you need a ticket.</span></li>"
       "<li><b>05:00</b><span>Lights on: your night of bad decisions ends here. Luckily, the metro opens again at 5am on weekdays and Paral·lel (L2 and L3) is two minutes away to get you home.</span></li></ul>"]),
@@ -272,7 +272,7 @@ C = {
       "<p>El lunes es la noche de la gente que no vive con un calendario normal: estudiantes y Erasmus, viajeros, expats y todo el que trabaja en hostelería y libra lunes y martes.</p>"]),
     ("Un lunes noche en Barcelona, <span>hora a hora</span>",
      ["<p>Barcelona va tarde. Un buen lunes es así:</p>",
-      "<ul class=\"timeline\"><li><b>21:30</b><span>Cena tarde. El Poble-sec, al lado de Sala Apolo, está lleno de sitios para comer, sobre todo en la calle Blai, aunque en Barcelona, una de las mejores ciudades del mundo para comer, cualquier barrio es buena opción. Desde cualquier punto llegas en metro: la parada Paral·lel (L2 y L3) está a dos minutos de la sala. Eso sí, no te despistes: entre semana el último metro pasa sobre las 00:00.</span></li>"
+      "<ul class=\"timeline\"><li><b>21:30</b><span>Cena tarde. El Poble-sec, al lado de Sala Apolo, está lleno de sitios para comer, sobre todo en la calle Blai, aunque en Barcelona, una de las mejores ciudades del mundo para comer, cualquier barrio es buena opción. Desde cualquier punto llegas en metro: la parada Paral·lel (L2 y L3) está a dos minutos de la sala. Eso sí, no te despistes: de lunes a jueves el metro cierra a medianoche, así que ven antes.</span></li>"
       "<li><b>00:00</b><span>Abren las puertas de Sala Apolo. Empieza Bad Decisions, la fiesta de los lunes en Barcelona.</span></li>"
       f"<li><b>{FREE_UNTIL}</b><span>Última hora para la lista gratis. A partir de aquí necesitas entrada.</span></li>"
       "<li><b>05:00</b><span>Se encienden las luces: tu noche de malas decisiones termina aquí. Por suerte, entre semana el metro vuelve a abrir a las 05:00 y tienes Paral·lel (L2 y L3) a dos minutos para volver a casa.</span></li></ul>"]),
