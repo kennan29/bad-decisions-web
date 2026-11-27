@@ -13,6 +13,7 @@ import datetime as dt
 import html
 import json
 from urllib.parse import quote
+import legal
 import os
 import sys
 
@@ -63,6 +64,8 @@ PAGES = {
     "dates": {"en": "dates/", "es": "es/fechas/"},
     "guide": {"en": "monday-night-barcelona/", "es": "es/lunes-noche-barcelona/"},
     "info":  {"en": "info/", "es": "es/info/"},
+    "legal": {"en": "legal/", "es": "es/aviso-legal/"},
+    "privacy": {"en": "privacy/", "es": "es/privacidad/"},
 }
 
 
@@ -345,6 +348,7 @@ def jsonld(page, lang, soon=False):
                       "image": SITE + "/assets/img/event-16x9.jpg", "datePublished": "2026-11-25", "dateModified": BUILD_DATE, "mainEntityOfPage": url("guide", lang), "about": place})
     if page != "home":
         names = dict(c["nav"])
+        names.update(legal=legal.PAGE_TEXT[lang]["nav_legal"], privacy=legal.PAGE_TEXT[lang]["nav_privacy"])
         graph.append({"@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": names["home"], "item": url("home", lang)},
             {"@type": "ListItem", "position": 2, "name": names[page], "item": url(page, lang)}]})
@@ -436,7 +440,7 @@ def footer(lang, path):
     <h2>{c['footer']}</h2>
     <div class="socials"><a href="{INSTAGRAM}" target="_blank" rel="noopener">Instagram</a><a href="mailto:{EMAIL}">{EMAIL}</a><a href="#" class="share-inline" data-action="share">{SHARE_ICON}{c['share']}</a></div>
     <nav class="foot-links">{links}</nav>
-    <p class="legal">{c['legal']}</p>
+    <p class="legal">{c['legal']}<br><a href="{href(path, 'legal', lang)}">{legal.PAGE_TEXT[lang]['nav_legal']}</a> · <a href="{href(path, 'privacy', lang)}">{legal.PAGE_TEXT[lang]['nav_privacy']}</a></p>
   </div>
 </footer>
 <div class="mcta">{dice('btn-list', c['free_list'])}{dice('btn-ticket', c['tickets'])}</div>
@@ -655,7 +659,25 @@ def build_soon(lang, path):
 """
 
 
-BUILDERS = {"home": build_home, "dates": build_dates, "guide": build_guide, "info": build_info}
+def _legal_page(lang, h1_lede, sections):
+    body = "".join(f"<h2>{h2}</h2>" + "".join(parts) for h2, parts in sections)
+    return page_hero(*h1_lede) + f'<section style="padding-top:10px"><div class="wrap"><article class="prose legal-prose">{body}</article></div></section>\n'
+
+
+def build_legal(lang, path):
+    return _legal_page(lang, legal.PAGE_TEXT[lang]["legal"], legal.legal_sections(lang, EMAIL, href(path, "privacy", lang)))
+
+
+def build_privacy(lang, path):
+    return _legal_page(lang, legal.PAGE_TEXT[lang]["privacy"], legal.privacy_sections(lang, EMAIL))
+
+
+for _l in ("en", "es"):
+    C[_l]["meta"]["legal"] = legal.PAGE_TEXT[_l]["meta_legal"]
+    C[_l]["meta"]["privacy"] = legal.PAGE_TEXT[_l]["meta_privacy"]
+
+BUILDERS = {"home": build_home, "dates": build_dates, "guide": build_guide, "info": build_info,
+            "legal": build_legal, "privacy": build_privacy}
 
 
 def write(path, content):
@@ -830,5 +852,7 @@ if __name__ == "__main__":
         f.write(build_404())
     with open(os.path.join(OUT, "_headers"), "w") as f:
         f.write(HEADERS)
+    if legal.missing():
+        print("Note: legal pages still have placeholders for: " + ", ".join(legal.missing()) + " (fill COMPANY in legal.py)")
     mode = "COMING SOON page" if SHOW_SOON else "full site"
     print(f"Built {mode} into {OUT}" + (" (local preview links)" if LOCAL else ""))
