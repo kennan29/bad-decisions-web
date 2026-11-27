@@ -165,8 +165,11 @@ section{padding:110px 0 20px}
 .ev.is-special .ev-date{background:var(--acid);border-color:var(--acid)}
 .ev.is-special .ev-day,.ev.is-special .ev-dow,.ev.is-special .ev-mon{color:#0b0b0b}
 .ev.is-past{opacity:.4}
-.lang{font-family:var(--head);font-weight:400;font-size:.75rem;text-decoration:none;color:var(--mute);border:1px solid var(--line);border-radius:10px;padding:.45em .7em}
-.lang:hover{color:var(--acid);border-color:var(--acid)}
+.lang{display:inline-flex;align-items:center;gap:.45em;font-family:var(--head);font-weight:400;font-size:.8rem;letter-spacing:.04em;text-decoration:none;color:var(--mute);border:1px solid var(--line);border-radius:10px;padding:.45em .75em;white-space:nowrap}
+.lang-globe{flex:none}
+.lang b{font-weight:400;color:var(--acid)}
+.lang i{font-style:normal;opacity:.45;margin:0 .3em}
+.lang:hover{color:var(--cream,#F5F0E7);border-color:var(--acid)}
 @media(max-width:760px){.nav .lang{margin-left:auto}.nav .lang + .btn{margin-left:0}}
 /* music */
 .genres{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;perspective:1000px}

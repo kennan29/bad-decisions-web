@@ -397,6 +397,15 @@ def dice(cls, label):
     return f'<a class="btn {cls}" data-dice href="#tickets">{label}</a>'
 
 
+GLOBE = '<svg class="lang-globe" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9.2"/><path d="M2.8 12h18.4M12 2.8c2.6 2.6 3.9 5.6 3.9 9.2s-1.3 6.6-3.9 9.2M12 2.8C9.4 5.4 8.1 8.4 8.1 12s1.3 6.6 3.9 9.2"/></svg>'
+
+
+def lang_label(lang):
+    """Globe + 'EN / ES' with the current language highlighted."""
+    en, es = ('<b>EN</b>', 'ES') if lang == "en" else ('EN', '<b>ES</b>')
+    return f'{GLOBE}<span>{en}<i>/</i>{es}</span>'
+
+
 def nav(page, lang, path):
     c, p = C[lang], depth_prefix(path)
     other = "es" if lang == "en" else "en"
@@ -407,7 +416,7 @@ def nav(page, lang, path):
   <div class="wrap">
     <a href="{href(path, 'home', lang)}" class="nav-logo" aria-label="{c['home_label']}"><img src="{p}assets/img/logo-acid-nav.webp" alt="Bad Decisions" width="200" height="120"></a>
     <ul class="nav-links">{links}</ul>
-    <a class="lang" href="{href(path, page, other)}" hreflang="{hl}" lang="{hl}" aria-label="{aria}">{code}</a>
+    <a class="lang" href="{href(path, page, other)}" hreflang="{hl}" lang="{hl}" aria-label="{aria}">{lang_label(lang)}</a>
     {dice('btn-list', c['free_list'])}
   </div>
 </header>
@@ -617,7 +626,7 @@ def build_soon(lang, path):
     return head("home", lang, path, soon=True) + f"""<header class="nav" id="nav">
   <div class="wrap">
     <span class="nav-logo"><img src="{p}assets/img/logo-acid-nav.webp" alt="Bad Decisions" width="200" height="120"></span>
-    <a class="lang" style="margin-left:auto" href="{depth_prefix(path) + PAGES['home'][other] or './'}" hreflang="{hl}" lang="{hl}" aria-label="{aria}">{code}</a>
+    <a class="lang" style="margin-left:auto" href="{depth_prefix(path) + PAGES['home'][other] or './'}" hreflang="{hl}" lang="{hl}" aria-label="{aria}">{lang_label(lang)}</a>
   </div>
 </header>
 <main>
