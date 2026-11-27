@@ -3,6 +3,10 @@
 When the company is set up, fill in COMPANY below and rebuild: every placeholder
 on both pages is taken from here. Until then the missing data shows highlighted.
 Last reviewed: see UPDATED. Have a gestoría/lawyer check the final text.
+
+RULE: any change to the site that affects data, cookies, analytics/pixels, forms,
+providers, embeds, ticketing or the company must update these texts (EN and ES)
+and UPDATED in the same change.
 """
 
 COMPANY = {
