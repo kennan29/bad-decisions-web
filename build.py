@@ -12,6 +12,7 @@ No dependencies beyond Python 3.
 import datetime as dt
 import html
 import json
+import re
 from urllib.parse import quote
 import legal
 import os
@@ -30,6 +31,8 @@ _branch = os.environ.get("CF_PAGES_BRANCH") or os.environ.get("WORKERS_CI_BRANCH
 SHOW_SOON = COMING_SOON and not LOCAL and "--full" not in sys.argv and (_branch in (None, "", "main"))
 SITE = "https://baddecisionsbcn.com"
 BUILD_DATE = dt.date.today().isoformat()
+GUIDE_UPDATED = dt.date(2026, 11, 28)  # change when the Monday guide content changes
+MONTHS_ES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
 
 # ---------------------------------------------------------------- DATA (edit here)
 FIRST_MONDAY = dt.date(2027, 3, 1)
@@ -179,17 +182,17 @@ C = {
      ["<p>Barcelona runs late. A good Monday looks like this:</p>",
       "<ul class=\"timeline\"><li><b>20:00</b><span>Dinner in Poble-sec, right next to Sala Apolo: it's full of places to eat, especially around Carrer de Blai, but Barcelona is one of the best food cities in the world, so any neighbourhood works.</span></li><li><b>22:30</b><span>Meet your crew for the warm-up at a bar or pub in Poble-sec or around Paral·lel, a few steps from the venue. You can get here by metro from anywhere: Paral·lel station (L2 and L3) is two minutes from Sala Apolo. Just don't get distracted: Monday to Thursday the metro closes at midnight, so come before then.</span></li>"
       "<li><b>00:00</b><span>Doors open at Sala Apolo. Bad Decisions, Barcelona's Monday night party, starts, with hip-hop, house and pop throwbacks from our resident DJ.</span></li>"
-      f"<li><b>{FREE_UNTIL}</b><span>Last call to get in free with the list. After this you need a ticket, from 11 €.</span></li>"
+      f"<li><b>{FREE_UNTIL}</b><span>Last call to get in free with the list. After this you need a ticket, from {PRICE_ADVANCE} €.</span></li>"
       "<li><b>05:00</b><span>Lights on: your night of bad decisions ends here. Luckily, the metro opens again at 5am on weekdays and Paral·lel (L2 and L3) is two minutes away to get you home.</span></li></ul>"]),
-    ("Where is it and <span>how to get to Sala Apolo</span>",
+    ("Where is it and <span>how do you get to Sala Apolo?</span>",
      [f"<p><strong>Sala Apolo</strong>, {VENUE['street']}, {VENUE['postal']} Barcelona, in Poble-sec. It's one of the city's classic venues, a few minutes' walk from the Gothic Quarter and the Raval.</p>",
       "<ul><li><strong>Metro:</strong> Paral·lel (L2 and L3), two minutes away.</li><li><strong>On foot:</strong> about 20 minutes from Plaça de Catalunya, down the Rambla and along Nou de la Rambla.</li><li><strong>Night bus and taxi:</strong> if you leave before 5am, there are NitBus night buses (almost every line goes through Plaça de Catalunya) or you can take a taxi.</li><li><strong>Going home:</strong> we close at 5am, when the metro starts running again on weekdays.</li></ul>",
       f'<p class="prose-cta"><a class="btn btn-ticket" href="{MAPS_URL}" target="_blank" rel="noopener">📍 Open Sala Apolo in Google Maps</a></p>']),
     ("What's the music <span>and the crowd?</span>",
      ["<p>Throwbacks all night: the hip-hop, house and pop classics everyone knows, played by our resident DJ. No drama at the door, no strict dress code, no pretending.</p>",
       "<p>The crowd is international and local, mostly 18 to 35: students, Erasmus, expats, travellers and people from Barcelona. If you're looking for an Erasmus or international party in Barcelona on a Monday, this is it. And a good place to meet people if you've just arrived.</p>"]),
-    ("How to get in <span>(for free)</span>",
-     [f"<p>Join the <strong>free list</strong> and get in free until {FREE_UNTIL}. After that, an advance ticket is {PRICE_ADVANCE} € and a ticket at the door is {PRICE_DOOR} €. Bring a valid ID: it's 18+. No football or sports team shirts.</p>"]),
+    ("How do you get in free <span>and how much are tickets?</span>",
+     [f"<p>Join the <strong>free list</strong> and get in free until {FREE_UNTIL}. After that, an advance ticket is {PRICE_ADVANCE} € and a ticket at the door is {PRICE_DOOR} €. The free list and tickets are on <strong>DICE</strong>. Bring a valid ID: it's 18+. No football or sports team shirts, and the venue reserves the right of admission.</p>"]),
    ],
   },
  },
@@ -275,17 +278,17 @@ C = {
      ["<p>Barcelona va tarde. Un buen lunes es así:</p>",
       "<ul class=\"timeline\"><li><b>20:00</b><span>Cena en el Poble-sec, al lado de Sala Apolo: está lleno de sitios para comer, sobre todo en la calle Blai, aunque en Barcelona, una de las mejores ciudades del mundo para comer, cualquier barrio es buena opción.</span></li><li><b>22:30</b><span>Queda con tu gente para la previa en algún bar o pub del Poble-sec o del Paral·lel, a pocos pasos de la sala. Desde cualquier punto llegas en metro: Paral·lel (L2 y L3) está a dos minutos de Sala Apolo. Eso sí, no te despistes: de lunes a jueves el metro cierra a medianoche, así que ven antes.</span></li>"
       "<li><b>00:00</b><span>Abren las puertas de Sala Apolo. Empieza Bad Decisions, la fiesta de los lunes en Barcelona, con throwbacks de hip-hop, house y pop y nuestro DJ residente.</span></li>"
-      f"<li><b>{FREE_UNTIL}</b><span>Última hora para entrar gratis con la lista. A partir de aquí necesitas entrada, desde 11 €.</span></li>"
+      f"<li><b>{FREE_UNTIL}</b><span>Última hora para entrar gratis con la lista. A partir de aquí necesitas entrada, desde {PRICE_ADVANCE} €.</span></li>"
       "<li><b>05:00</b><span>Se encienden las luces: tu noche de malas decisiones termina aquí. Por suerte, entre semana el metro vuelve a abrir a las 05:00 y tienes Paral·lel (L2 y L3) a dos minutos para volver a casa.</span></li></ul>"]),
-    ("Dónde es y <span>cómo llegar a Sala Apolo</span>",
+    ("¿Dónde es y <span>cómo llegar a Sala Apolo?</span>",
      [f"<p><strong>Sala Apolo</strong>, {VENUE['street']}, {VENUE['postal']} Barcelona, en el Poble-sec. Es una de las salas clásicas de la ciudad, a pocos minutos a pie del Gòtic y del Raval.</p>",
       "<ul><li><strong>Metro:</strong> Paral·lel (L2 y L3), a dos minutos.</li><li><strong>A pie:</strong> unos 20 minutos desde Plaça de Catalunya, bajando por la Rambla y siguiendo Nou de la Rambla.</li><li><strong>Bus nocturno y taxi:</strong> si te vas antes de las 05:00, tienes los autobuses nocturnos NitBus (casi todas las líneas pasan por Plaça de Catalunya) o puedes coger un taxi.</li><li><strong>Para volver:</strong> cerramos a las 05:00, cuando el metro vuelve a funcionar entre semana.</li></ul>",
       f'<p class="prose-cta"><a class="btn btn-ticket" href="{MAPS_URL}" target="_blank" rel="noopener">📍 Abrir Sala Apolo en Google Maps</a></p>']),
     ("¿Qué música y <span>qué ambiente?</span>",
      ["<p>Throwbacks toda la noche: los clásicos de hip-hop, house y pop que todo el mundo se sabe, con nuestro DJ residente. Sin dramas en la puerta, sin dress code estricto, sin postureo.</p>",
       "<p>Gente internacional y local, sobre todo de 18 a 35 años: estudiantes, Erasmus, expats, viajeros y gente de Barcelona. Si buscas una fiesta Erasmus o internacional en Barcelona un lunes, es aquí. Y un buen sitio para conocer gente si acabas de llegar.</p>"]),
-    ("Cómo entrar <span>(gratis)</span>",
-     [f"<p>Apúntate a la <strong>lista gratis</strong> y entra sin pagar hasta la {FREE_UNTIL}. Después, la entrada anticipada cuesta {PRICE_ADVANCE} € y en taquilla {PRICE_DOOR} €. Trae un documento de identidad válido: es +18. No se permiten camisetas de fútbol ni de equipos deportivos.</p>"]),
+    ("¿Cómo entrar gratis <span>y cuánto cuestan las entradas?</span>",
+     [f"<p>Apúntate a la <strong>lista gratis</strong> y entra sin pagar hasta la {FREE_UNTIL}. Después, la entrada anticipada cuesta {PRICE_ADVANCE} € y en taquilla {PRICE_DOOR} €. La lista gratis y las entradas están en <strong>DICE</strong>. Trae un documento de identidad válido: es +18. No se permiten camisetas de fútbol ni de equipos deportivos, y la sala se reserva el derecho de admisión.</p>"]),
    ],
   },
  },
@@ -345,9 +348,15 @@ def jsonld(page, lang, soon=False):
         graph.append({"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]})
     if page == "guide":
         g = c["guide_page"]
+        strip = lambda t: re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", t)).replace(" ,", ",").replace(" .", ".").strip()
+        q0 = strip(g["h1"]); q0 = ("¿" + q0 + "?") if lang == "es" else (q0 + "?")
+        cap = lambda t: t[:1].upper() + t[1:]
+        faq_g = [(q0, cap(strip(g["answer"]).split(":", 1)[1].strip()))]
+        faq_g += [(strip(h2), strip(" ".join(x for x in parts if "prose-cta" not in x))) for h2, parts in g["sections"] if "?" in h2]
+        graph.append({"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq_g]})
         graph.append({"@type": "Article", "headline": c["meta"]["guide"][0].split(" · ")[0], "description": c["meta"]["guide"][1],
                       "inLanguage": lang, "author": {"@id": SITE + "/#org"}, "publisher": {"@id": SITE + "/#org"},
-                      "image": SITE + "/assets/img/event-16x9.jpg", "datePublished": "2026-11-25", "dateModified": BUILD_DATE, "mainEntityOfPage": url("guide", lang), "about": place})
+                      "image": SITE + "/assets/img/event-16x9.jpg", "datePublished": "2026-11-25", "dateModified": GUIDE_UPDATED.isoformat(), "mainEntityOfPage": url("guide", lang), "about": place})
     if page != "home":
         names = dict(c["nav"])
         names.update(legal=legal.PAGE_TEXT[lang]["nav_legal"], privacy=legal.PAGE_TEXT[lang]["nav_privacy"])
@@ -622,6 +631,9 @@ def build_guide(lang, path):
     body = '<div class="answer reveal"><p>' + g["answer"] + '</p></div>'
     for h2, parts in g["sections"]:
         body += f"<h2>{h2}</h2>" + "".join(parts)
+    d = GUIDE_UPDATED
+    upd = f"Actualizado: {d.day} de {MONTHS_ES[d.month - 1]} de {d.year}" if lang == "es" else f"Updated: {d.day} {d.strftime('%B')} {d.year}"
+    body += f'<p class="updated"><time datetime="{d.isoformat()}">{upd}</time></p>'
     return page_hero(g["h1"], g["lede"]) + f'<section style="padding-top:10px"><div class="wrap"><article class="prose">{body}</article>{cta_band(lang)}</div></section>\n'
 
 

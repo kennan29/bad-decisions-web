@@ -236,6 +236,7 @@ footer h2 span{color:var(--acid)}
 .prose a{color:var(--acid)}
 .prose a.btn{color:var(--cream);text-decoration:none}
 .prose .prose-cta{margin-top:22px}
+.prose .updated{margin-top:40px;color:var(--mute);font-size:.85rem}
 .prose mark.todo{background:#d8ff3e22;color:var(--acid);border:1px dashed var(--acid);border-radius:6px;padding:0 .3em}
 .legal-prose h2{font-size:clamp(1.4rem,3vw,1.9rem);margin-top:40px}
 .legal-prose em{color:var(--mute);font-style:normal;font-size:.9rem}
