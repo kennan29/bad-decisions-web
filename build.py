@@ -168,7 +168,7 @@ C = {
             "The Monday party at Sala Apolo, Barcelona: midnight to 5am, free list until 01:30, tickets from 11 €, dress code, ID, how to get there and contact."),
   },
   "dates_page": ("Every Monday. <span>Pick your damage.</span>", f"Bad Decisions happens every Monday night at Sala Apolo, Barcelona, from midnight to 5am. Pick your Monday, get on the free list and be there before {FREE_UNTIL}."),
-  "info_page": ("The boring stuff. <span>Quickly.</span>", "All about the Monday party at Sala Apolo: address, times, prices, free list, dress code and how to get there. What you need before your next bad decision."),
+  "info_page": ("Mondays at Apolo. <span>Everything you need to know.</span>", "All about the Monday party at Sala Apolo: address, times, prices, free list, dress code and how to get there. What you need before your next bad decision."),
   "cta_band": "Your next Monday <span>is sorted.</span>",
   "guide_page": {
    "h1": "What to do in Barcelona <span>on a Monday night</span>",
@@ -264,7 +264,7 @@ C = {
             "Fiesta de los lunes en Sala Apolo, Barcelona: de 00:00 a 05:00, lista gratis hasta la 01:30, entradas desde 11 €, dress code, DNI, cómo llegar y contacto."),
   },
   "dates_page": ("Cada lunes. <span>Elige tu desastre.</span>", f"Bad Decisions es cada lunes por la noche en Sala Apolo, Barcelona, de 00:00 a 05:00. Elige tu lunes, apúntate a la lista gratis y llega antes de la {FREE_UNTIL}."),
-  "info_page": ("Lo aburrido. <span>Rápido.</span>", "Todo sobre la fiesta de los lunes en Sala Apolo: dirección, horario, precios, lista gratis, dress code y cómo llegar. Lo que necesitas antes de tu próxima mala decisión."),
+  "info_page": ("Lunes en Apolo. <span>Todo lo que necesitas saber.</span>", "Todo sobre la fiesta de los lunes en Sala Apolo: dirección, horario, precios, lista gratis, dress code y cómo llegar. Lo que necesitas antes de tu próxima mala decisión."),
   "cta_band": "El próximo lunes <span>ya tienes plan.</span>",
   "guide_page": {
    "h1": "Qué hacer en Barcelona <span>un lunes por la noche</span>",
