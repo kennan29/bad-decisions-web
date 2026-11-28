@@ -134,13 +134,15 @@ C = {
   "faq_eyebrow": "Info", "faq_h2": "The boring stuff. <span>Quickly.</span>", "all_faq": "All the practical info →",
   "faq": [
    ("What can I do in Barcelona on a Monday night?", f"Come to Bad Decisions. Every Monday from midnight to 5am at Sala Apolo ({VENUE['short']}, Poble-sec), with hip-hop, house and pop throwbacks. Free list until {FREE_UNTIL}."),
-   ("How does the free list work?", f"Join the free list on DICE and get in before {FREE_UNTIL} without paying. After {FREE_UNTIL} you need a ticket: {PRICE_ADVANCE} € in advance or {PRICE_DOOR} € at the door."),
-   ("When and where is it?", f"Every Monday night, from midnight to 5am, at Sala Apolo ({VENUE['short']}, {VENUE['postal']} Barcelona). The opening is on Monday 1 March 2027."),
+   ("How does the free list work?", f"Join the free list on DICE and get in free until {FREE_UNTIL}. After {FREE_UNTIL} you need a ticket."),
+   ("How much are tickets?", f"Free until {FREE_UNTIL} with the free list. After that, advance tickets are {PRICE_ADVANCE} € and tickets at the door are {PRICE_DOOR} €. Everything is on DICE."),
+   ("When and where is it?", f"Every Monday night, from midnight to 5am, at Sala Apolo Barcelona ({VENUE['short']}, {VENUE['postal']} Barcelona)."),
    ("What music do you play?", "Throwbacks: hip-hop, house and pop classics, played by our resident DJ."),
    ("Is there a dress code?", "Come as you are. Just no football or sports team shirts. The venue reserves the right of admission."),
    ("Do I need ID?", "Yes. It's 18+ and you'll need a valid ID at the door."),
-   ("How do I get there?", "Sala Apolo is next to Paral·lel metro station (lines L2 and L3) and the Paral·lel funicular. The metro opens again at 5am on weekdays, right when we close."),
-   ("Will I regret it?", "Probably. Tomorrow can wait."),
+   ("How do I get there?", "Paral·lel metro station (L2 and L3) is a minute's walk from Sala Apolo. Monday to Thursday the metro closes at midnight and opens again at 5am, right when we close. If you'd rather take a taxi, there's a taxi rank right next to the venue, and Avinguda del Paral·lel is a busy street where taxis pass all the time."),
+   ("Are there clubs open on Mondays in Barcelona?", "Not many: Monday is the quietest night and lots of clubs close. Bad Decisions is on every Monday from midnight to 5am at Sala Apolo."),
+   ("Will I regret it?", "Probably. But remember: the best stories start with a bad decision."),
   ],
   "where_facts": [("Monday", "every week"), ("00:00–05:00", "doors to close"), (FREE_UNTIL, "free list until"), ("18+", "bring your ID")],
   "maps": "Open in maps", "getting_there": "Metro Paral·lel (L2, L3)",
@@ -180,13 +182,13 @@ C = {
       "<p>Monday is the night for people who don't run on a normal calendar: students and Erasmus, travellers, expats, and everyone who works in hospitality and has Monday and Tuesday off.</p>"]),
     ("A Monday night in Barcelona, <span>hour by hour</span>",
      ["<p>Barcelona runs late. A good Monday looks like this:</p>",
-      "<ul class=\"timeline\"><li><b>20:00</b><span>Dinner in Poble-sec, right next to Sala Apolo: it's full of places to eat, especially around Carrer de Blai, but Barcelona is one of the best food cities in the world, so any neighbourhood works.</span></li><li><b>22:30</b><span>Meet your crew for the warm-up at a bar or pub in Poble-sec or around Paral·lel, a few steps from the venue. You can get here by metro from anywhere: Paral·lel station (L2 and L3) is two minutes from Sala Apolo. Just don't get distracted: Monday to Thursday the metro closes at midnight, so come before then.</span></li>"
+      "<ul class=\"timeline\"><li><b>20:00</b><span>Dinner in Poble-sec, right next to Sala Apolo: it's full of places to eat, especially around Carrer de Blai, but Barcelona is one of the best food cities in the world, so any neighbourhood works.</span></li><li><b>22:30</b><span>Meet your crew for the warm-up at a bar or pub in Poble-sec or around Paral·lel, a few steps from the venue. You can get here by metro from anywhere: Paral·lel station (L2 and L3) is a minute's walk from Sala Apolo. Just don't get distracted: Monday to Thursday the metro closes at midnight, so come before then.</span></li>"
       "<li><b>00:00</b><span>Doors open at Sala Apolo. Bad Decisions, Barcelona's Monday night party, starts, with hip-hop, house and pop throwbacks from our resident DJ.</span></li>"
       f"<li><b>{FREE_UNTIL}</b><span>Last call to get in free with the list. After this you need a ticket, from {PRICE_ADVANCE} €.</span></li>"
-      "<li><b>05:00</b><span>Lights on: your night of bad decisions ends here. Luckily, the metro opens again at 5am on weekdays and Paral·lel (L2 and L3) is two minutes away to get you home.</span></li></ul>"]),
+      "<li><b>05:00</b><span>Lights on: your night of bad decisions ends here. Luckily, the metro opens again at 5am on weekdays and Paral·lel (L2 and L3) is a minute away to get you home.</span></li></ul>"]),
     ("Where is it and <span>how do you get to Sala Apolo?</span>",
      [f"<p><strong>Sala Apolo</strong>, {VENUE['street']}, {VENUE['postal']} Barcelona, in Poble-sec. It's one of the city's classic venues, a few minutes' walk from the Gothic Quarter and the Raval.</p>",
-      "<ul><li><strong>Metro:</strong> Paral·lel (L2 and L3), two minutes away.</li><li><strong>On foot:</strong> about 20 minutes from Plaça de Catalunya, down the Rambla and along Nou de la Rambla.</li><li><strong>Night bus and taxi:</strong> if you leave before 5am, there are NitBus night buses (almost every line goes through Plaça de Catalunya) or you can take a taxi.</li><li><strong>Going home:</strong> we close at 5am, when the metro starts running again on weekdays.</li></ul>",
+      "<ul><li><strong>Metro:</strong> Paral·lel (L2 and L3), a minute's walk.</li><li><strong>On foot:</strong> about 20 minutes from Plaça de Catalunya, down the Rambla and along Nou de la Rambla.</li><li><strong>Night bus and taxi:</strong> if you leave before 5am, there are NitBus night buses (almost every line goes through Plaça de Catalunya) or you can take a taxi.</li><li><strong>Going home:</strong> we close at 5am, when the metro starts running again on weekdays.</li></ul>",
       f'<p class="prose-cta"><a class="btn btn-ticket" href="{MAPS_URL}" target="_blank" rel="noopener">📍 Open Sala Apolo in Google Maps</a></p>']),
     ("What's the music <span>and the crowd?</span>",
      ["<p>Throwbacks all night: the hip-hop, house and pop classics everyone knows, played by our resident DJ. No drama at the door, no strict dress code, no pretending.</p>",
@@ -230,13 +232,15 @@ C = {
   "faq_eyebrow": "Info", "faq_h2": "Lo aburrido. <span>Rápido.</span>", "all_faq": "Toda la info práctica →",
   "faq": [
    ("¿Qué hacer un lunes por la noche en Barcelona?", f"Venir a Bad Decisions. Cada lunes de 00:00 a 05:00 en Sala Apolo ({VENUE['short']}, Poble-sec), con throwbacks de hip-hop, house y pop. Lista gratis hasta la {FREE_UNTIL}."),
-   ("¿Cómo funciona la lista gratis?", f"Apúntate a la lista gratis en DICE y entra sin pagar antes de la {FREE_UNTIL}. A partir de la {FREE_UNTIL} necesitas entrada: {PRICE_ADVANCE} € anticipada o {PRICE_DOOR} € en taquilla."),
-   ("¿Cuándo y dónde es?", f"Cada lunes por la noche, de 00:00 a 05:00, en Sala Apolo ({VENUE['short']}, {VENUE['postal']} Barcelona). El opening es el lunes 1 de marzo de 2027."),
+   ("¿Cómo funciona la lista gratis?", f"Apúntate a la lista gratis en DICE y entra sin pagar hasta la {FREE_UNTIL}. A partir de la {FREE_UNTIL} necesitas entrada."),
+   ("¿Cuánto cuestan las entradas?", f"Gratis hasta la {FREE_UNTIL} con la lista. Después, la entrada anticipada cuesta {PRICE_ADVANCE} € y en taquilla {PRICE_DOOR} €. Todo está en DICE."),
+   ("¿Cuándo y dónde es?", f"Cada lunes por la noche, de 00:00 a 05:00, en Sala Apolo Barcelona ({VENUE['short']}, {VENUE['postal']} Barcelona)."),
    ("¿Qué música ponéis?", "Throwbacks: clásicos de hip-hop, house y pop, con nuestro DJ residente."),
    ("¿Hay dress code?", "Ven como quieras. Solo no se permiten camisetas de fútbol ni de equipos deportivos. La sala se reserva el derecho de admisión."),
    ("¿Necesito DNI?", "Sí. Es para mayores de 18 y tienes que enseñar un documento de identidad válido en la puerta."),
-   ("¿Cómo llego?", "Sala Apolo está al lado de la parada de metro Paral·lel (L2 y L3) y del funicular de Montjuïc. Entre semana el metro vuelve a abrir a las 05:00, justo cuando cerramos."),
-   ("¿Me arrepentiré?", "Probablemente. Mañana puede esperar."),
+   ("¿Cómo llego?", "El metro Paral·lel (L2 y L3) está a un minuto a pie de Sala Apolo. De lunes a jueves el metro cierra a medianoche y vuelve a abrir a las 05:00, justo cuando cerramos. Si prefieres taxi, hay una parada justo al lado de la sala, y por la avenida del Paral·lel, muy transitada, pasan taxis constantemente."),
+   ("¿Hay discotecas abiertas los lunes en Barcelona?", "Pocas: el lunes es la noche más tranquila y muchas discotecas cierran. Bad Decisions abre cada lunes de 00:00 a 05:00 en Sala Apolo."),
+   ("¿Me arrepentiré?", "Probablemente. Pero piensa que las mejores historias empiezan con una mala decisión."),
   ],
   "where_facts": [("Lunes", "cada semana"), ("00:00–05:00", "apertura a cierre"), (FREE_UNTIL, "lista gratis hasta"), ("+18", "trae tu DNI")],
   "maps": "Abrir en Maps", "getting_there": "Metro Paral·lel (L2, L3)",
@@ -276,13 +280,13 @@ C = {
       "<p>El lunes es la noche de la gente que no vive con un calendario normal: estudiantes y Erasmus, viajeros, expats y todo el que trabaja en hostelería y libra lunes y martes.</p>"]),
     ("Un lunes noche en Barcelona, <span>hora a hora</span>",
      ["<p>Barcelona va tarde. Un buen lunes es así:</p>",
-      "<ul class=\"timeline\"><li><b>20:00</b><span>Cena en el Poble-sec, al lado de Sala Apolo: está lleno de sitios para comer, sobre todo en la calle Blai, aunque en Barcelona, una de las mejores ciudades del mundo para comer, cualquier barrio es buena opción.</span></li><li><b>22:30</b><span>Queda con tu gente para la previa en algún bar o pub del Poble-sec o del Paral·lel, a pocos pasos de la sala. Desde cualquier punto llegas en metro: Paral·lel (L2 y L3) está a dos minutos de Sala Apolo. Eso sí, no te despistes: de lunes a jueves el metro cierra a medianoche, así que ven antes.</span></li>"
+      "<ul class=\"timeline\"><li><b>20:00</b><span>Cena en el Poble-sec, al lado de Sala Apolo: está lleno de sitios para comer, sobre todo en la calle Blai, aunque en Barcelona, una de las mejores ciudades del mundo para comer, cualquier barrio es buena opción.</span></li><li><b>22:30</b><span>Queda con tu gente para la previa en algún bar o pub del Poble-sec o del Paral·lel, a pocos pasos de la sala. Desde cualquier punto llegas en metro: Paral·lel (L2 y L3) está a un minuto a pie de Sala Apolo. Eso sí, no te despistes: de lunes a jueves el metro cierra a medianoche, así que ven antes.</span></li>"
       "<li><b>00:00</b><span>Abren las puertas de Sala Apolo. Empieza Bad Decisions, la fiesta de los lunes en Barcelona, con throwbacks de hip-hop, house y pop y nuestro DJ residente.</span></li>"
       f"<li><b>{FREE_UNTIL}</b><span>Última hora para entrar gratis con la lista. A partir de aquí necesitas entrada, desde {PRICE_ADVANCE} €.</span></li>"
-      "<li><b>05:00</b><span>Se encienden las luces: tu noche de malas decisiones termina aquí. Por suerte, entre semana el metro vuelve a abrir a las 05:00 y tienes Paral·lel (L2 y L3) a dos minutos para volver a casa.</span></li></ul>"]),
+      "<li><b>05:00</b><span>Se encienden las luces: tu noche de malas decisiones termina aquí. Por suerte, entre semana el metro vuelve a abrir a las 05:00 y tienes Paral·lel (L2 y L3) a un minuto para volver a casa.</span></li></ul>"]),
     ("¿Dónde es y <span>cómo llegar a Sala Apolo?</span>",
      [f"<p><strong>Sala Apolo</strong>, {VENUE['street']}, {VENUE['postal']} Barcelona, en el Poble-sec. Es una de las salas clásicas de la ciudad, a pocos minutos a pie del Gòtic y del Raval.</p>",
-      "<ul><li><strong>Metro:</strong> Paral·lel (L2 y L3), a dos minutos.</li><li><strong>A pie:</strong> unos 20 minutos desde Plaça de Catalunya, bajando por la Rambla y siguiendo Nou de la Rambla.</li><li><strong>Bus nocturno y taxi:</strong> si te vas antes de las 05:00, tienes los autobuses nocturnos NitBus (casi todas las líneas pasan por Plaça de Catalunya) o puedes coger un taxi.</li><li><strong>Para volver:</strong> cerramos a las 05:00, cuando el metro vuelve a funcionar entre semana.</li></ul>",
+      "<ul><li><strong>Metro:</strong> Paral·lel (L2 y L3), a un minuto a pie.</li><li><strong>A pie:</strong> unos 20 minutos desde Plaça de Catalunya, bajando por la Rambla y siguiendo Nou de la Rambla.</li><li><strong>Bus nocturno y taxi:</strong> si te vas antes de las 05:00, tienes los autobuses nocturnos NitBus (casi todas las líneas pasan por Plaça de Catalunya) o puedes coger un taxi.</li><li><strong>Para volver:</strong> cerramos a las 05:00, cuando el metro vuelve a funcionar entre semana.</li></ul>",
       f'<p class="prose-cta"><a class="btn btn-ticket" href="{MAPS_URL}" target="_blank" rel="noopener">📍 Abrir Sala Apolo en Google Maps</a></p>']),
     ("¿Qué música y <span>qué ambiente?</span>",
      ["<p>Throwbacks toda la noche: los clásicos de hip-hop, house y pop que todo el mundo se sabe, con nuestro DJ residente. Sin dramas en la puerta, sin dress code estricto, sin postureo.</p>",
