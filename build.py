@@ -181,9 +181,10 @@ C = {
       "<li><b>00:00</b><span>Doors open at Sala Apolo. Bad Decisions, Barcelona's Monday night party, starts, with hip-hop, house and pop throwbacks from our resident DJ.</span></li>"
       f"<li><b>{FREE_UNTIL}</b><span>Last call to get in free with the list. After this you need a ticket, from 11 €.</span></li>"
       "<li><b>05:00</b><span>Lights on: your night of bad decisions ends here. Luckily, the metro opens again at 5am on weekdays and Paral·lel (L2 and L3) is two minutes away to get you home.</span></li></ul>"]),
-    ("Where is it and <span>how to get there</span>",
+    ("Where is it and <span>how to get to Sala Apolo</span>",
      [f"<p><strong>Sala Apolo</strong>, {VENUE['street']}, {VENUE['postal']} Barcelona, in Poble-sec. It's one of the city's classic venues, a few minutes' walk from the Gothic Quarter and the Raval.</p>",
-      "<ul><li><strong>Metro:</strong> Paral·lel (L2 and L3), two minutes away.</li><li><strong>On foot:</strong> about 15 minutes from Plaça de Catalunya, down the Rambla and along Nou de la Rambla.</li><li><strong>Going home:</strong> we close at 5am, when the metro starts running again on weekdays.</li></ul>"]),
+      "<ul><li><strong>Metro:</strong> Paral·lel (L2 and L3), two minutes away.</li><li><strong>On foot:</strong> about 20 minutes from Plaça de Catalunya, down the Rambla and along Nou de la Rambla.</li><li><strong>Night bus and taxi:</strong> if you leave before 5am, there are NitBus night buses (almost every line goes through Plaça de Catalunya) or you can take a taxi.</li><li><strong>Going home:</strong> we close at 5am, when the metro starts running again on weekdays.</li></ul>",
+      f'<p class="prose-cta"><a class="btn btn-ticket" href="{MAPS_URL}" target="_blank" rel="noopener">📍 Open Sala Apolo in Google Maps</a></p>']),
     ("What's the music <span>and the crowd?</span>",
      ["<p>Throwbacks all night: the hip-hop, house and pop classics everyone knows, played by our resident DJ. No guest list drama, no strict dress code, no pretending.</p>",
       "<p>The crowd is international and local, mostly 18 to 35: students, Erasmus, expats, travellers and hospitality workers. A good place to meet people if you've just arrived in Barcelona.</p>"]),
@@ -276,9 +277,10 @@ C = {
       "<li><b>00:00</b><span>Abren las puertas de Sala Apolo. Empieza Bad Decisions, la fiesta de los lunes en Barcelona, con throwbacks de hip-hop, house y pop y nuestro DJ residente.</span></li>"
       f"<li><b>{FREE_UNTIL}</b><span>Última hora para entrar gratis con la lista. A partir de aquí necesitas entrada, desde 11 €.</span></li>"
       "<li><b>05:00</b><span>Se encienden las luces: tu noche de malas decisiones termina aquí. Por suerte, entre semana el metro vuelve a abrir a las 05:00 y tienes Paral·lel (L2 y L3) a dos minutos para volver a casa.</span></li></ul>"]),
-    ("Dónde es y <span>cómo llegar</span>",
+    ("Dónde es y <span>cómo llegar a Sala Apolo</span>",
      [f"<p><strong>Sala Apolo</strong>, {VENUE['street']}, {VENUE['postal']} Barcelona, en el Poble-sec. Es una de las salas clásicas de la ciudad, a pocos minutos a pie del Gòtic y del Raval.</p>",
-      "<ul><li><strong>Metro:</strong> Paral·lel (L2 y L3), a dos minutos.</li><li><strong>A pie:</strong> unos 15 minutos desde Plaça de Catalunya, bajando por la Rambla y siguiendo Nou de la Rambla.</li><li><strong>Para volver:</strong> cerramos a las 05:00, cuando el metro vuelve a funcionar entre semana.</li></ul>"]),
+      "<ul><li><strong>Metro:</strong> Paral·lel (L2 y L3), a dos minutos.</li><li><strong>A pie:</strong> unos 20 minutos desde Plaça de Catalunya, bajando por la Rambla y siguiendo Nou de la Rambla.</li><li><strong>Bus nocturno y taxi:</strong> si te vas antes de las 05:00, tienes los autobuses nocturnos NitBus (casi todas las líneas pasan por Plaça de Catalunya) o puedes coger un taxi.</li><li><strong>Para volver:</strong> cerramos a las 05:00, cuando el metro vuelve a funcionar entre semana.</li></ul>",
+      f'<p class="prose-cta"><a class="btn btn-ticket" href="{MAPS_URL}" target="_blank" rel="noopener">📍 Abrir Sala Apolo en Google Maps</a></p>']),
     ("¿Qué música y <span>qué ambiente?</span>",
      ["<p>Throwbacks toda la noche: los clásicos de hip-hop, house y pop que todo el mundo se sabe, con nuestro DJ residente. Sin dramas en la puerta, sin dress code estricto, sin postureo.</p>",
       "<p>Gente internacional y local, sobre todo de 18 a 35 años: estudiantes, Erasmus, expats, viajeros y gente de hostelería. Un buen sitio para conocer gente si acabas de llegar a Barcelona.</p>"]),
