@@ -178,8 +178,8 @@ C = {
     ("A Monday night in Barcelona, <span>hour by hour</span>",
      ["<p>Barcelona runs late. A good Monday looks like this:</p>",
       "<ul class=\"timeline\"><li><b>20:00</b><span>Dinner in Poble-sec, right next to Sala Apolo: it's full of places to eat, especially around Carrer de Blai, but Barcelona is one of the best food cities in the world, so any neighbourhood works.</span></li><li><b>22:30</b><span>Meet your crew for the warm-up at a bar or pub in Poble-sec or around Paral·lel, a few steps from the venue. You can get here by metro from anywhere: Paral·lel station (L2 and L3) is two minutes from Sala Apolo. Just don't get distracted: Monday to Thursday the metro closes at midnight, so come before then.</span></li>"
-      "<li><b>00:00</b><span>Doors open at Sala Apolo. Bad Decisions, Barcelona's Monday night party, starts.</span></li>"
-      f"<li><b>{FREE_UNTIL}</b><span>Last call for the free list. After this you need a ticket.</span></li>"
+      "<li><b>00:00</b><span>Doors open at Sala Apolo. Bad Decisions, Barcelona's Monday night party, starts, with hip-hop, house and pop throwbacks from our resident DJ.</span></li>"
+      f"<li><b>{FREE_UNTIL}</b><span>Last call to get in free with the list. After this you need a ticket, from 11 €.</span></li>"
       "<li><b>05:00</b><span>Lights on: your night of bad decisions ends here. Luckily, the metro opens again at 5am on weekdays and Paral·lel (L2 and L3) is two minutes away to get you home.</span></li></ul>"]),
     ("Where is it and <span>how to get there</span>",
      [f"<p><strong>Sala Apolo</strong>, {VENUE['street']}, {VENUE['postal']} Barcelona, in Poble-sec. It's one of the city's classic venues, a few minutes' walk from the Gothic Quarter and the Raval.</p>",
@@ -273,8 +273,8 @@ C = {
     ("Un lunes noche en Barcelona, <span>hora a hora</span>",
      ["<p>Barcelona va tarde. Un buen lunes es así:</p>",
       "<ul class=\"timeline\"><li><b>20:00</b><span>Cena en el Poble-sec, al lado de Sala Apolo: está lleno de sitios para comer, sobre todo en la calle Blai, aunque en Barcelona, una de las mejores ciudades del mundo para comer, cualquier barrio es buena opción.</span></li><li><b>22:30</b><span>Queda con tu gente para la previa en algún bar o pub del Poble-sec o del Paral·lel, a pocos pasos de la sala. Desde cualquier punto llegas en metro: Paral·lel (L2 y L3) está a dos minutos de Sala Apolo. Eso sí, no te despistes: de lunes a jueves el metro cierra a medianoche, así que ven antes.</span></li>"
-      "<li><b>00:00</b><span>Abren las puertas de Sala Apolo. Empieza Bad Decisions, la fiesta de los lunes en Barcelona.</span></li>"
-      f"<li><b>{FREE_UNTIL}</b><span>Última hora para la lista gratis. A partir de aquí necesitas entrada.</span></li>"
+      "<li><b>00:00</b><span>Abren las puertas de Sala Apolo. Empieza Bad Decisions, la fiesta de los lunes en Barcelona, con throwbacks de hip-hop, house y pop y nuestro DJ residente.</span></li>"
+      f"<li><b>{FREE_UNTIL}</b><span>Última hora para entrar gratis con la lista. A partir de aquí necesitas entrada, desde 11 €.</span></li>"
       "<li><b>05:00</b><span>Se encienden las luces: tu noche de malas decisiones termina aquí. Por suerte, entre semana el metro vuelve a abrir a las 05:00 y tienes Paral·lel (L2 y L3) a dos minutos para volver a casa.</span></li></ul>"]),
     ("Dónde es y <span>cómo llegar</span>",
      [f"<p><strong>Sala Apolo</strong>, {VENUE['street']}, {VENUE['postal']} Barcelona, en el Poble-sec. Es una de las salas clásicas de la ciudad, a pocos minutos a pie del Gòtic y del Raval.</p>",
